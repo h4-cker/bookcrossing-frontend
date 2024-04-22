@@ -27,8 +27,10 @@ const Header = () => {
             </div>
             <button className="join_button">Join now</button>
             <div className={"user_field"}>
-                <button className={"user_profile_buttom"}></button>
-                <h5>User</h5>
+                <button className={"user_profile_button"}>
+                    <img src="public/profile.png" className="profile_img"/>
+                </button>
+                <h3>User</h3>
                 <button className={"logout_buttom"}></button>
             </div>
         </header>

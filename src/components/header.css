@@ -37,6 +37,7 @@
 
 .logo_img{
     width: 48px;
+    padding: 20px;
 }
 
 .logo_text{
@@ -63,7 +64,7 @@
     display: flex;
     align-items: center;
     gap: 8px;
-    padding: 6px 12px;
+    padding: 10px ;
     border: 1px solid rgba(198, 198, 198, 1);
     border-radius: 4px;
     background-color:  #fff;
@@ -104,4 +105,13 @@
     padding: 8px;
     border: none;
     cursor: pointer;
+}
+
+.user_profile_button{
+    display: flex;
+    justify-content: space-around;
+}
+
+.profile_img{
+    width: 28px;
 }
