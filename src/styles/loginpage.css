@@ -1,0 +1,21 @@
+.navbar-container{
+    width: 100vw;
+
+}
+
+.left-side {
+    background: url(public/books.png);
+    width: 50%;
+    position: absolute;
+    left: 0px;
+    height: 100%;
+}
+
+.right-side {
+
+    width: 50%;
+    position: absolute;
+    right: 0px;
+    height: 100%;
+}
+
