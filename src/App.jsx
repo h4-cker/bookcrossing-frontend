@@ -1,10 +1,10 @@
 import "./styles/App.css";
-import Header from "./components/header.jsx";
+import Homepage from "./pages/homepage.jsx";
 
 function App() {
   return (
       <div>
-        <Header/>
+        <Homepage/>
       </div>
   );
 }

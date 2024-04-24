@@ -1,39 +1,47 @@
 import '../styles/header.css';
+import {useRef} from "react";
 
 const Header = () => {
+
+    const navRef = useRef();
+
+    const showNavbar = () =>{
+        navRef.current.classList.toggle(
+            "responsive_nav"
+        );
+    }
+
     return (
-        <header className="header">
-            <div className="logo_container">
-                <img src="public/logo.png" className="logo_img"></img>
-                <h3 className="logo_text">BookHaven</h3>
+        <div className='navbar'>
+            <img src="public/logo.png" alt="" className='logo'/>
+
+            <ul>
+                <li href="/#">Catalog</li>
+                <li>Chat</li>
+                <li className="login-li">Login</li>
+            </ul>
+
+            <div className='search-box'>
+                <input type="text" placeholder='Search'/>
+                <img src="public/search.png"/>
             </div>
-            <div className="search_container">
-                <div className="search_box">
-                    <label htmlFor="search-input" className="visually-hidden">
-                    </label>
-                    <input
-                        type="text"
-                        id="search-input"
-                        placeholder="Search books"
-                        className="search-input"
-                    />
-                    <img
-                        loading="lazy"
-                        src="public/search.png"
-                        alt="Search icon"
-                        className="search-icon"
-                    />
-                </div>
-            </div>
-            <button className="join_button">Join now</button>
-            <div className={"user_field"}>
-                <button className={"user_profile_button"}>
-                    <img src="public/profile.png" className="profile_img"/>
+
+            <nav ref={navRef} className='navpoint'>
+                <a href="/#">Catalog</a>
+                <a href="/#">Chat</a>
+                <a href="/#">Login</a>
+                <button
+                    className="nav-close-btn"
+                    onClick={showNavbar}>
+                    <img src="public/close.png"/>
                 </button>
-                <h3>User</h3>
-                <button className={"logout_buttom"}></button>
-            </div>
-        </header>
+            </nav>
+            <button
+                className="options-container"
+                onClick={showNavbar}>
+                <img src='public/options.png' className='options'/>
+            </button>
+        </div>
     );
 };
 
