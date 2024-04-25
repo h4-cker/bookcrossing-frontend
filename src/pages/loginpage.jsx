@@ -1,6 +1,7 @@
 import React from 'react';
 import Header from "../components/header.jsx";
 import "../styles/loginpage.css"
+import Loginform from "../components/loginform.jsx";
 
 const Loginpage = () => {
     return (
@@ -9,9 +10,11 @@ const Loginpage = () => {
                 <Header/>
             </div>
             <div className="login-body">
-                <div className="lef-side">
-                </div>
                 <div className="right-side">
+                    <Loginform/>
+                </div>
+                <div className="lef-side">
+                    <img src="public/books.png" alt=""/>
                 </div>
             </div>
         </div>

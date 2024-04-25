@@ -3,19 +3,55 @@
 
 }
 
-.left-side {
-    background: url(public/books.png);
-    width: 50%;
-    position: absolute;
-    left: 0px;
-    height: 100%;
+.login-body{
+    flex-direction: row;
+    display: flex;
+    min-height: 100%;
+    width: 100%;
 }
 
-.right-side {
-
+.lef-side{
     width: 50%;
-    position: absolute;
-    right: 0px;
-    height: 100%;
+    min-height: 100%;
+    max-height: 100%;
 }
 
+.lef-side p{
+    font-size: 3em;
+    display: flex;
+    position: relative;
+    align-items: center;
+    top: 5em;
+    text-align: center;
+}
+
+.lef-side img{
+    max-height: 100vh;
+    min-width: 100%;
+}
+
+.right-side{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
+    background-color: #cec2b1;
+    height: 100vh;
+
+}
+
+@media only screen and (max-width: 991px){
+    .right-side{
+        visibility: hidden;
+        width: 0;
+    }
+
+    .lef-side{
+        width: 100%;
+    }
+
+    .lef-side img{
+        width: 100%;
+        min-height: 100%;
+    }
+}
