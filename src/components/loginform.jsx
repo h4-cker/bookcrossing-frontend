@@ -14,9 +14,13 @@ const Loginform = () => {
                         <input placeholder="Enter password"/>
                     </div>
                 </div>
-                <div className="buttoms">
-                    <button>Login</button>
-                    <button>Sign-Up</button>
+                <div className="buttons">
+                    <div className="login-button-box">
+                        <button className="login-button">Login</button>
+                    </div>
+                    <div className="register-button-box">
+                        <button className="register-button">Sign-Up</button>
+                    </div>
                 </div>
             </div>
         </div>

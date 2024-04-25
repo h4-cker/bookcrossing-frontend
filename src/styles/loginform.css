@@ -6,8 +6,9 @@
     text-align: center;
     width: 30vw;
     height: 50vh;
+    color: white;
     background: lightslategray;
-    border-radius: 64px;
+    border-radius: 16px;
     padding: 30px 20px;
 }
 
@@ -20,10 +21,75 @@
     height: 100%;
 }
 
-.buttoms{
+.buttons{
     justify-content: space-between;
     display: flex;
-    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    padding: 7%;
+}
+
+.login-button-box{
+    display: flex;
+    text-align: center;
+    align-items: center;
+    background: #242424;
+    border-radius: 16px;
+    width: 30%;
+}
+
+.login-button{
+    display: flex;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    padding: 13px;
+    background: transparent;
+    border: 0;
+    outline: 0;
+    color: white;
+    font-size: 24px;
+}
+
+.login-button-box:hover{
+    display: flex;
+    text-align: center;
+    align-items: center;
+    background: black;
+    border-radius: 16px;
+    width: 30%;
+}
+
+.register-button-box{
+    display: flex;
+    text-align: center;
+    align-items: center;
+    background: #242424;
+    border-radius: 16px;
+    width: 50%;
+
+}
+
+.register-button{
+    display: flex;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    padding: 13px;
+    background: transparent;
+    border: 0;
+    outline: 0;
+    color: white;
+    font-size: 24px;
+}
+
+.register-button-box:hover{
+    display: flex;
+    text-align: center;
+    align-items: center;
+    background: black;
+    border-radius: 16px;
+    width: 50%;
 }
 
 .login-box{
@@ -34,6 +100,7 @@
     border-radius: 16px;
     width: 100%;
     margin-bottom: 7%;
+
 }
 
 .login-box input{
