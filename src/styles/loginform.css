@@ -4,12 +4,18 @@
     flex-direction: column;
     align-items: center;
     text-align: center;
-    width: 30vw;
+    width: auto;
     height: 50vh;
     color: white;
     background: lightslategray;
     border-radius: 16px;
     padding: 30px 20px;
+}
+
+.login-container h1{
+    color: #242424;
+    font-family: sans-serif;
+    font-style: italic;
 }
 
 .inputs-box{
@@ -35,11 +41,11 @@
     align-items: center;
     background: #242424;
     border-radius: 16px;
-    width: 30%;
+    margin: 10px;
+    width: 50%;
 }
 
 .login-button{
-    display: flex;
     align-items: center;
     text-align: center;
     width: 100%;
@@ -48,7 +54,7 @@
     border: 0;
     outline: 0;
     color: white;
-    font-size: 24px;
+    font-size: 18px;
 }
 
 .login-button-box:hover{
@@ -57,21 +63,20 @@
     align-items: center;
     background: black;
     border-radius: 16px;
-    width: 30%;
+    width: 50%;
 }
 
 .register-button-box{
     display: flex;
     text-align: center;
     align-items: center;
-    background: #242424;
+    background: darkgray;
     border-radius: 16px;
     width: 50%;
 
 }
 
 .register-button{
-    display: flex;
     align-items: center;
     text-align: center;
     width: 100%;
@@ -80,14 +85,15 @@
     border: 0;
     outline: 0;
     color: white;
-    font-size: 24px;
+    font-size: 18px;
 }
+
 
 .register-button-box:hover{
     display: flex;
     text-align: center;
     align-items: center;
-    background: black;
+    background: dimgrey;
     border-radius: 16px;
     width: 50%;
 }
@@ -104,6 +110,27 @@
 }
 
 .login-box input{
+    width: 90%;
+    padding: 6px;
+    background: transparent;
+    border: 0;
+    outline: 0;
+    color: white;
+    font-size: 18px;
+}
+
+.email-box{
+    display: flex;
+    align-items: center;
+    background: #242424;
+    padding: 10px 20px;
+    border-radius: 16px;
+    width: 100%;
+    margin-bottom: 7%;
+
+}
+
+.email-box input{
     width: 90%;
     padding: 6px;
     background: transparent;

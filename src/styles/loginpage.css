@@ -41,16 +41,16 @@
 }
 
 @media only screen and (max-width: 991px){
-    .right-side{
+    .lef-side{
         visibility: hidden;
         width: 0;
     }
 
-    .lef-side{
+    .right-side{
         width: 100%;
     }
 
-    .lef-side img{
+    .right-side img{
         width: 100%;
         min-height: 100%;
     }
