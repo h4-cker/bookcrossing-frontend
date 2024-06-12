@@ -9,7 +9,13 @@ const BookDetailsModal = ({ book, isOpen, onClose }) => {
             <div className="modal-content" onClick={(e) => e.stopPropagation()}>
                 <h2>{book.title}</h2>
                 <p>{book.description}</p>
-                <button onClick={onClose}>Close</button>
+                <h3>Exchange Offers:</h3>
+                <ul className="exchange-offers">
+                    {book.exchangeOffers.map((offer, index) => (
+                        <li key={index}>{offer}</li>
+                    ))}
+                </ul>
+                <button className="modal-close-button" onClick={onClose}>Close</button>
             </div>
         </div>
     );

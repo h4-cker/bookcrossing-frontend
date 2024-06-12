@@ -8,13 +8,15 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
 }
 
 .modal-content {
     background-color: #fff;
     padding: 20px;
     border-radius: 4px;
-    width: 80%;
+    width: 100%;
     max-width: 500px;
     text-align: center;
 }
@@ -29,14 +31,27 @@
     color: #666;
 }
 
-.modal-content button {
-    padding: 10px 20px;
-    border: none;
-    background-color: #333;
-    color: #fff;
-    cursor: pointer;
+.modal-content h3 {
+    color: #ff5722;
+    margin-bottom: 10px;
 }
 
-.modal-content button:hover {
-    background-color: #555;
+.exchange-offers {
+    list-style-type: none;
+    padding: 0;
+    color: #555;
+}
+
+.modal-close-button {
+    padding: 10px 20px;
+    border: none;
+    background-color: #ff5722;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.modal-close-button:hover {
+    background-color: #e64a19;
 }

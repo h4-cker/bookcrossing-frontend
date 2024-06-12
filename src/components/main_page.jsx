@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Header from './Header1.jsx';
+import Header1 from './Header1.jsx';
 import SearchFilter from "./SearchFilter.jsx";
 import BookCard from './BookCard.jsx';
 import BookDetailsModal from './BookDetailsModal.jsx';
@@ -13,13 +13,15 @@ const Main_page = () => {
             image: 'https://via.placeholder.com/150',
             rating: 4,
             description: 'Description of book 1',
-            genre: 'Fiction'
+            genre: 'Fiction',
+            exchangeOffers: ['Offer 1', 'Offer 2']
         },
         // Add more book objects here
     ]);
     const [search, setSearch] = useState('');
     const [genre, setGenre] = useState('');
     const [selectedBook, setSelectedBook] = useState(null);
+    const [isAddBookFormOpen, setIsAddBookFormOpen] = useState(false);
 
     const addBook = (book) => {
         setBooks([...books, book]);
@@ -32,7 +34,7 @@ const Main_page = () => {
 
     return (
         <div className="app">
-            <Header />
+            <Header1 onAddBookClick={() => setIsAddBookFormOpen(true)} />
             <SearchFilter search={search} setSearch={setSearch} genre={genre} setGenre={setGenre} />
             <div className="book-list">
                 {filteredBooks.map((book, index) => (
@@ -40,9 +42,10 @@ const Main_page = () => {
                 ))}
             </div>
             <BookDetailsModal book={selectedBook} isOpen={!!selectedBook} onClose={() => setSelectedBook(null)} />
-            <AddBookForm addBook={addBook} />
+            <AddBookForm addBook={addBook} isOpen={isAddBookFormOpen} onClose={() => setIsAddBookFormOpen(false)} />
         </div>
     );
 };
+
 
 export default Main_page;
