@@ -1,10 +1,10 @@
 import "./styles/App.css";
-import Loginpage from "./pages/loginpage.jsx";
+import Main_page from "./components/main_page.jsx";
 
 function App() {
   return (
       <div>
-        <Loginpage/>
+          <Main_page/>
       </div>
   );
 }

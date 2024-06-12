@@ -1,0 +1,17 @@
+.search-filter {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.search-filter input,
+.search-filter select {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    flex: 1;
+}
+
+.search-filter select {
+    flex: 0.3;
+}

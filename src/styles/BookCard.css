@@ -1,0 +1,30 @@
+.book-card {
+    background-color: #fff;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    text-align: center;
+    cursor: pointer;
+    transition: box-shadow 0.3s;
+}
+
+.book-card:hover {
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.book-image {
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+}
+
+.book-title {
+    font-size: 18px;
+    margin: 10px 0;
+    color: #333;
+}
+
+.book-rating {
+    font-size: 14px;
+    color: #666;
+}
