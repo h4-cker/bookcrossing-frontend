@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import SearchFilter from "../components/SearchFilter.jsx";
-import BookCard from '../components/BookCard.jsx';
-import BookDetailsModel from '../components/BookDetailsModel.jsx';
-import AddBookForm from '../components/AddBookForm.jsx';
-import '../styles/MainPage.css';
-import Header from "../components/Header.jsx";
+import Header1 from './Header1.jsx';
+import SearchFilter from "./SearchFilter.jsx";
+import BookCard from './BookCard.jsx';
+import BookDetailsModal from './BookDetailsModal.jsx';
+import AddBookForm from './AddBookForm.jsx';
+import '../styles/main_page.css';
 
-const MainPage = () => {
+const Main_page = () => {
     const [books, setBooks] = useState([
         {
             title: 'Book 1',
@@ -34,18 +34,18 @@ const MainPage = () => {
 
     return (
         <div className="app">
-            <Header onAddBookClick={() => setIsAddBookFormOpen(true)} />
+            <Header1 onAddBookClick={() => setIsAddBookFormOpen(true)} />
             <SearchFilter search={search} setSearch={setSearch} genre={genre} setGenre={setGenre} />
             <div className="book-list">
                 {filteredBooks.map((book, index) => (
                     <BookCard key={index} book={book} onClick={setSelectedBook} />
                 ))}
             </div>
-            <BookDetailsModel book={selectedBook} isOpen={!!selectedBook} onClose={() => setSelectedBook(null)} />
+            <BookDetailsModal book={selectedBook} isOpen={!!selectedBook} onClose={() => setSelectedBook(null)} />
             <AddBookForm addBook={addBook} isOpen={isAddBookFormOpen} onClose={() => setIsAddBookFormOpen(false)} />
         </div>
     );
 };
 
 
-export default MainPage;
+export default Main_page;

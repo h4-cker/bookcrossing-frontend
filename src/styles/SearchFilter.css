@@ -1,33 +1,34 @@
 .search-filter {
     display: flex;
+    justify-content: center;
+    align-items: center;
     gap: 10px;
-    margin-top: 20px;
+    margin: 20px auto;
+    width: calc(100% - 40px); /* Добавлены отступы */
 }
 
-.search-filter input,
-.search-filter select {
+.search-input {
     padding: 10px;
+    font-size: 16px;
+    width: 300px;
     border: 1px solid #ddd;
     border-radius: 4px;
-    flex: 1;
 }
 
-.search-filter select {
-    flex: 0.3;
-}
-
-.search-filter input:focus,
-.search-filter select:focus {
-    border-color: #ff5722;
-    outline: none;
+.genre-select {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
 }
 
 @media (max-width: 768px) {
     .search-filter {
         flex-direction: column;
+        gap: 20px;
     }
 
-    .search-filter select {
-        flex: 1;
+    .search-input, .genre-select {
+        width: 100%;
     }
 }
