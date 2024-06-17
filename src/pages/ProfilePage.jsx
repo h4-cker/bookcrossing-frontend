@@ -50,7 +50,12 @@ const ProfilePage = () => {
             <div className="profile-header">
                 <div className="profile-avatar">
                     <img src={user.avatar} alt="Avatar" />
-                    {isEditing && <input type="file" onChange={handleAvatarChange} />}
+                    {isEditing && (
+                        <label className="upload-button">
+                            Change Avatar
+                            <input type="file" onChange={handleAvatarChange} />
+                        </label>
+                    )}
                 </div>
                 <div className="profile-details">
                     {isEditing ? (

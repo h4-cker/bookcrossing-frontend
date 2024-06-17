@@ -27,10 +27,25 @@
     object-fit: cover;
 }
 
-.profile-avatar input {
-    position: absolute;
-    bottom: 10px;
-    left: 10px;
+.profile-avatar .upload-button {
+    display: inline-block;
+    margin-top: 10px;
+    background-color: #ff5722;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: center;
+    font-size: 14px;
+    transition: background-color 0.3s;
+}
+
+.profile-avatar .upload-button:hover {
+    background-color: #e64a19;
+}
+
+.profile-avatar .upload-button input {
+    display: none;
 }
 
 .profile-details {
