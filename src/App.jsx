@@ -1,5 +1,5 @@
 import "./styles/App.css";
-import MainPage from "./components/MainPage.jsx";
+import MainPage from "./pages/MainPage.jsx";
 import LoginPage from "./pages/LoginPage.jsx";
 
 function App() {

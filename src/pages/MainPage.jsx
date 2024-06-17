@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import Header1 from './Header1.jsx';
-import SearchFilter from "./SearchFilter.jsx";
-import BookCard from './BookCard.jsx';
-import BookDetailsModel from './BookDetailsModel.jsx';
-import AddBookForm from './AddBookForm.jsx';
+import SearchFilter from "../components/SearchFilter.jsx";
+import BookCard from '../components/BookCard.jsx';
+import BookDetailsModel from '../components/BookDetailsModel.jsx';
+import AddBookForm from '../components/AddBookForm.jsx';
 import '../styles/MainPage.css';
+import Header from "../components/Header.jsx";
 
 const MainPage = () => {
     const [books, setBooks] = useState([
@@ -34,7 +34,7 @@ const MainPage = () => {
 
     return (
         <div className="app">
-            <Header1 onAddBookClick={() => setIsAddBookFormOpen(true)} />
+            <Header onAddBookClick={() => setIsAddBookFormOpen(true)} />
             <SearchFilter search={search} setSearch={setSearch} genre={genre} setGenre={setGenre} />
             <div className="book-list">
                 {filteredBooks.map((book, index) => (
