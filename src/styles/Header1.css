@@ -1,32 +1,60 @@
 .header {
     width: 100%;
-    background-color: #333;
-    color: white;
-    padding: 10px 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 20px;
+    background-color: #ff5722;
+    color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
 }
 
 .header-logo {
-    color: white;
-    text-decoration: none;
     font-size: 24px;
     font-weight: bold;
+    color: white;
+    text-decoration: none;
 }
 
-.nav-button {
-    margin-left: 10px;
-    background-color: #ff5722;
-    border: none;
+.header-links {
+    display: flex;
+    align-items: center;
+}
+
+.header-link {
+    margin-right: 20px;
     color: white;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.header-link:hover {
+    text-decoration: underline;
+}
+
+.add-book-button {
     padding: 10px 20px;
+    background-color: white;
+    color: #ff5722;
+    border: none;
     cursor: pointer;
     border-radius: 4px;
-    font-size: 14px;
     transition: background-color 0.3s;
 }
 
-.nav-button:hover {
-    background-color: #e64a19;
+.add-book-button:hover {
+    background-color: #ffe0b2;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .header-links {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .header-link {
+        margin: 10px 0;
+    }
 }

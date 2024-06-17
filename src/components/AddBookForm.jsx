@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import '../styles/AddBookForm.css';
+import '../styles/AddBookForm.css'; // Ensure correct path to CSS file
 
-const AddBookForm = ({ addBook, isOpen, onClose }) => {
+const AddBookForm = ({ addBook, onClose }) => {
     const [title, setTitle] = useState('');
     const [image, setImage] = useState('');
     const [rating, setRating] = useState('');
@@ -18,8 +18,6 @@ const AddBookForm = ({ addBook, isOpen, onClose }) => {
         addBook({ title, image, rating, description, genre, exchangeOffers: [{ user: 'Current User', contact: 'current@example.com', phone }] });
         onClose();
     };
-
-    if (!isOpen) return null;
 
     return (
         <div className="add-book-overlay">

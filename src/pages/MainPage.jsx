@@ -6,9 +6,10 @@ import BookCard from '../components/BookCard.jsx';
 import BookDetailsModal from '../components/BookDetailsModal.jsx';
 import AddBookForm from '../components/AddBookForm.jsx';
 import ProfilePage from './ProfilePage';
+import AuthPage from "./AuthPage.jsx";
 import '../styles/MainPage.css';
 
-const Main_page = () => {
+const MainPage = () => {
     const [books, setBooks] = useState([
         {
             title: 'Book 1',
@@ -47,10 +48,10 @@ const Main_page = () => {
 
     const [selectedBook, setSelectedBook] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [isAddBookFormOpen, setIsAddBookFormOpen] = useState(true);
+    const [isAddBookFormOpen, setIsAddBookFormOpen] = useState(false);
     const [search, setSearch] = useState('');
     const [genre, setGenre] = useState('');
-    const [isAuthenticated, setIsAuthenticated] = useState(true); // Replace with actual authentication logic
+    const [isAuthenticated, setIsAuthenticated] = useState(false); // Replace with actual authentication logic
 
     const filteredBooks = books.filter((book) =>
         book.title.toLowerCase().includes(search.toLowerCase()) &&
@@ -113,20 +114,20 @@ const Main_page = () => {
                                     onClose={handleModalClose}
                                 />
                                 {isAddBookFormOpen && (
-                                    <AddBookForm onClose={handleAddBookFormClose} onAddBook={handleAddBook} />
+                                    <AddBookForm onClose={handleAddBookFormClose} addBook={handleAddBook} />
                                 )}
                             </div>
                         }
                     />
                     <Route
                         path="/profile"
-                        element={isAuthenticated ? <ProfilePage /> : <Navigate to="/login" />}
+                        element={isAuthenticated ? <ProfilePage /> : <Navigate to="/auth" />}
                     />
+                    <Route path="/auth" element={<AuthPage />} />
                 </Routes>
             </div>
         </Router>
     );
 };
 
-
-export default Main_page;
+export default MainPage;
