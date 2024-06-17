@@ -4,7 +4,7 @@ import SearchFilter from "./SearchFilter.jsx";
 import BookCard from './BookCard.jsx';
 import BookDetailsModel from './BookDetailsModel.jsx';
 import AddBookForm from './AddBookForm.jsx';
-import '../styles/main_page.css';
+import '../styles/MainPage.css';
 
 const MainPage = () => {
     const [books, setBooks] = useState([

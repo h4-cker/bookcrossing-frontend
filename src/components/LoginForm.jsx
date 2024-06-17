@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import { useSpring, animated } from 'react-spring';
-import "../styles/loginform.css"
+import "../styles/LoginForm.css"
 
 
 const LoginForm = () => {

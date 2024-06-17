@@ -148,6 +148,8 @@
     border-radius: 16px;
     width: 100%;
     margin: auto;
+    -webkit-text-security: disc;
+    text-security: disc;
 }
 
 .password-box input{

@@ -1,5 +1,5 @@
 import React from 'react';
-import '../styles/BookDetailsModal.css';
+import '../styles/BookDetailsModel.css';
 
 const BookDetailsModel = ({ book, isOpen, onClose }) => {
     if (!isOpen) return null;
