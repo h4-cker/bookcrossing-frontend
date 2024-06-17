@@ -1,9 +1,9 @@
 import React from 'react';
-import Header from "../components/header.jsx";
+import Header from "../components/Header.jsx";
 import "../styles/loginpage.css"
-import Loginform from "../components/loginform.jsx";
+import LoginForm from "../components/LoginForm.jsx";
 
-const Loginpage = () => {
+const LoginPage = () => {
     return (
         <div>
             <div className="navbar-container">
@@ -11,7 +11,7 @@ const Loginpage = () => {
             </div>
             <div className="login-body">
                 <div className="right-side">
-                    <Loginform/>
+                    <LoginForm/>
                 </div>
                 <div className="lef-side">
                     <img src="public/books.png" alt=""/>
@@ -21,4 +21,4 @@ const Loginpage = () => {
     );
 };
 
-export default Loginpage;
+export default LoginPage;

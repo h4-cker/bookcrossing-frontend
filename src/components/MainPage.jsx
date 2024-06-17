@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import Header1 from './Header1.jsx';
 import SearchFilter from "./SearchFilter.jsx";
 import BookCard from './BookCard.jsx';
-import BookDetailsModal from './BookDetailsModal.jsx';
+import BookDetailsModel from './BookDetailsModel.jsx';
 import AddBookForm from './AddBookForm.jsx';
 import '../styles/main_page.css';
 
-const Main_page = () => {
+const MainPage = () => {
     const [books, setBooks] = useState([
         {
             title: 'Book 1',
@@ -41,11 +41,11 @@ const Main_page = () => {
                     <BookCard key={index} book={book} onClick={setSelectedBook} />
                 ))}
             </div>
-            <BookDetailsModal book={selectedBook} isOpen={!!selectedBook} onClose={() => setSelectedBook(null)} />
+            <BookDetailsModel book={selectedBook} isOpen={!!selectedBook} onClose={() => setSelectedBook(null)} />
             <AddBookForm addBook={addBook} isOpen={isAddBookFormOpen} onClose={() => setIsAddBookFormOpen(false)} />
         </div>
     );
 };
 
 
-export default Main_page;
+export default MainPage;

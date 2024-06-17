@@ -1,10 +1,10 @@
 import "./styles/App.css";
-import Main_page from "./components/main_page.jsx";
+import MainPage from "./components/MainPage.jsx";
 
 function App() {
   return (
       <div>
-          <Main_page/>
+          <MainPage/>
       </div>
   );
 }

@@ -3,7 +3,7 @@ import { useSpring, animated } from 'react-spring';
 import "../styles/loginform.css"
 
 
-const Loginform = () => {
+const LoginForm = () => {
     const[registrationForm, setRegistrationForm] = useState(false)
 
     const registrationProps = useSpring({
@@ -91,4 +91,4 @@ const Loginform = () => {
 }
 
 
-export default Loginform;
+export default LoginForm;

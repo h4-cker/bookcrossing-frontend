@@ -1,7 +1,7 @@
 import React from 'react';
 import '../styles/BookDetailsModal.css';
 
-const BookDetailsModal = ({ book, isOpen, onClose }) => {
+const BookDetailsModel = ({ book, isOpen, onClose }) => {
     if (!isOpen) return null;
 
     return (
@@ -21,4 +21,4 @@ const BookDetailsModal = ({ book, isOpen, onClose }) => {
     );
 };
 
-export default BookDetailsModal;
+export default BookDetailsModel;
