@@ -1,7 +1,7 @@
 import '../styles/Header.css';
-import {useRef} from "react";
+import React, {useRef} from "react";
 
-const Header = () => {
+const Header = ({onAddBookClick}) => {
 
     const navRef = useRef();
 
@@ -30,6 +30,9 @@ const Header = () => {
                 <a href="/#">Catalog</a>
                 <a href="/#">Chat</a>
                 <a href="/#">Login</a>
+                <div className="center-section">
+                    <button className="nav-button" onClick={onAddBookClick}>Add New Book</button>
+                </div>
                 <button
                     className="nav-close-btn"
                     onClick={showNavbar}>

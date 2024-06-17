@@ -1,0 +1,111 @@
+.profile-page {
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+    box-sizing: border-box;
+    background: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+.profile-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.profile-avatar {
+    margin-right: 20px;
+    position: relative;
+}
+
+.profile-avatar img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.profile-avatar input {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+}
+
+.profile-details {
+    flex-grow: 1;
+}
+
+.profile-details input,
+.profile-details textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.profile-details button {
+    padding: 10px 20px;
+    background-color: #ff5722;
+    border: none;
+    color: white;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.profile-details button:hover {
+    background-color: #e64a19;
+}
+
+.profile-offers {
+    margin-top: 20px;
+}
+
+.profile-offers h3 {
+    margin-bottom: 20px;
+}
+
+.offers-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.offer-card {
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+    cursor: pointer;
+    max-width: 200px;
+    width: 100%;
+}
+
+.offer-card:hover {
+    transform: translateY(-5px);
+}
+
+.offer-card img {
+    width: 100%;
+    height: auto;
+}
+
+.offer-details {
+    padding: 10px;
+}
+
+.offer-details h4 {
+    margin: 0;
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+.offer-details p {
+    margin: 0;
+    font-size: 14px;
+    color: #555;
+}

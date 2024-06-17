@@ -5,8 +5,8 @@ import LoginPage from "./pages/LoginPage.jsx";
 function App() {
   return (
       <div>
-        <LoginPage/>
-        {/*<MainPage/>*/}
+        {/*<LoginPage/>*/}
+        <MainPage/>
       </div>
   );
 }
