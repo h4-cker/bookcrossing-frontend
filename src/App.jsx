@@ -1,12 +1,12 @@
 import "./styles/App.css";
 import MainPage from "./pages/MainPage.jsx";
-import LoginPage from "./pages/LoginPage.jsx";
+import AuthPage from "./pages/AuthPage.jsx";
 
 function App() {
   return (
       <div>
-        {/*<LoginPage/>*/}
-        <MainPage/>
+        <AuthPage/>
+        {/*<MainPage/>*/}
       </div>
   );
 }

@@ -47,7 +47,7 @@ const Main_page = () => {
 
     const [selectedBook, setSelectedBook] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [isAddBookFormOpen, setIsAddBookFormOpen] = useState(false);
+    const [isAddBookFormOpen, setIsAddBookFormOpen] = useState(true);
     const [search, setSearch] = useState('');
     const [genre, setGenre] = useState('');
     const [isAuthenticated, setIsAuthenticated] = useState(true); // Replace with actual authentication logic
