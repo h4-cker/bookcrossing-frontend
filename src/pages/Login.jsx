@@ -8,7 +8,7 @@ const Login = () => {
         navigate('/auth/register', { replace: true });
     }
 
-    function navigateMain() {
+    const navigateMain = () => {
         navigate('/', { replace: true })
     }
 
@@ -16,10 +16,15 @@ const Login = () => {
         <div className="auth-page">
             <div className="auth-container">
                 <h2>Login</h2>
-                <form className="auth-form">
-                    <input type="email" placeholder="Email" required />
-                    <input type="password" placeholder="Password" required />
-                    <button type="submit" onClick={ navigateMain }>Login</button>
+                <form className="auth-form"
+                      onSubmit={ navigateMain }>
+                    <input type="email"
+                           name="email"
+                           placeholder="Email" required />
+                    <input type="password"
+                           name="password"
+                           placeholder="Password" required />
+                    <button type="submit">Login</button>
                 </form>
                 <p className="toggle-form">
                     Don`t have an account?&nbsp;

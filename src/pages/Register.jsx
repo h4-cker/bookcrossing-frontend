@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import '../styles/LoginRegisterPages.css';
+import "../styles/LoginRegisterPages.css";
 
 const Register = () => {
     const navigate = useNavigate();
@@ -8,7 +8,7 @@ const Register = () => {
         navigate('/auth/login', { replace: true });
     }
 
-    function navigateMain() {
+    const navigateMain = () => {
         navigate('/', { replace: true })
     }
 

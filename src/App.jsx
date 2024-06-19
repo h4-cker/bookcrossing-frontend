@@ -6,14 +6,23 @@ import ProfilePage from "./pages/ProfilePage.jsx";
 import ContentPage from "./pages/ContentPage.jsx";
 
 function App() {
-  return (
-      <Routes>
-          <Route path="/" element={ <ContentPage/> }/>
-          <Route path="/auth/register" element={ <Register/> }/>
-          <Route path="/auth/login" element={ <Login/> }/>
-          <Route path="/profile" element={ <ProfilePage/> }/>
-      </Routes>
-  );
+    const isAuthenticated = true;
+    if (isAuthenticated) {
+        return (
+            <Routes>
+                <Route path="/" element={ <ContentPage/> }/>
+                <Route path="/auth/register" element={ <Register/> }/>
+                <Route path="/auth/login" element={ <Login/> }/>
+                <Route path="/profile" element={ <ProfilePage/> }/>
+            </Routes>
+        );
+    }
+    return (
+        <Routes>
+            <Route path="/auth/register" element={ <Register/> }/>
+            <Route path="/auth/login" element={ <Login/> }/>
+        </Routes>
+    );
 }
 
 export default App;
