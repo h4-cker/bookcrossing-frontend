@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import Header1 from '../components/Header1.jsx';
+import Header from '../components/Header.jsx';
 import SearchFilter from "../components/SearchFilter.jsx";
 import BookCard from '../components/BookCard.jsx';
 import BookDetailsModal from '../components/BookDetailsModal.jsx';
@@ -81,7 +81,7 @@ const ContentPage = () => {
     return (
         <div className="app">
             <div className="main-content">
-                <Header1
+                <Header
                     onAddBookClick={handleAddBookClick}
                     isAuthenticated={isAuthenticated}
                 />
