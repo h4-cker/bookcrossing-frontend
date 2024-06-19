@@ -1,15 +1,12 @@
-import React, { useState } from 'react';
-import { BrowserRouter as Router, Route, Routes, Link, Navigate } from 'react-router-dom';
+import { useState } from 'react';
 import Header1 from '../components/Header1.jsx';
 import SearchFilter from "../components/SearchFilter.jsx";
 import BookCard from '../components/BookCard.jsx';
 import BookDetailsModal from '../components/BookDetailsModal.jsx';
 import AddBookForm from '../components/AddBookForm.jsx';
-import ProfilePage from './ProfilePage';
-import AuthPage from "./AuthPage.jsx";
-import '../styles/MainPage.css';
+import '../styles/ContentPage.css';
 
-const MainPage = () => {
+const ContentPage = () => {
     const [books, setBooks] = useState([
         {
             title: 'Book 1',
@@ -82,52 +79,38 @@ const MainPage = () => {
     };
 
     return (
-        <Router>
-            <div className="app">
+        <div className="app">
+            <div className="main-content">
                 <Header1
                     onAddBookClick={handleAddBookClick}
                     isAuthenticated={isAuthenticated}
                 />
-                <Routes>
-                    <Route
-                        path="/"
-                        element={
-                            <div className="main-content">
-                                <SearchFilter
-                                    search={search}
-                                    setSearch={setSearch}
-                                    genre={genre}
-                                    setGenre={setGenre}
-                                />
-                                <div className="book-list">
-                                    {filteredBooks.map((book, index) => (
-                                        <BookCard
-                                            key={index}
-                                            book={book}
-                                            onClick={() => handleBookClick(book)}
-                                        />
-                                    ))}
-                                </div>
-                                <BookDetailsModal
-                                    book={selectedBook}
-                                    isOpen={isModalOpen}
-                                    onClose={handleModalClose}
-                                />
-                                {isAddBookFormOpen && (
-                                    <AddBookForm onClose={handleAddBookFormClose} addBook={handleAddBook} />
-                                )}
-                            </div>
-                        }
-                    />
-                    <Route
-                        path="/profile"
-                        element={isAuthenticated ? <ProfilePage /> : <Navigate to="/auth" />}
-                    />
-                    <Route path="/auth" element={<AuthPage />} />
-                </Routes>
+                <SearchFilter
+                    search={search}
+                    setSearch={setSearch}
+                    genre={genre}
+                    setGenre={setGenre}
+                />
+                <div className="book-list">
+                    {filteredBooks.map((book, index) => (
+                        <BookCard
+                            key={index}
+                            book={book}
+                            onClick={() => handleBookClick(book)}
+                        />
+                    ))}
+                </div>
+                <BookDetailsModal
+                    book={selectedBook}
+                    isOpen={isModalOpen}
+                    onClose={handleModalClose}
+                />
+                {isAddBookFormOpen && (
+                    <AddBookForm onClose={handleAddBookFormClose} addBook={handleAddBook} />
+                )}
             </div>
-        </Router>
+        </div>
     );
 };
 
-export default MainPage;
+export default ContentPage;

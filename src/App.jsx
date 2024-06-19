@@ -1,13 +1,18 @@
+import { Route, Routes } from "react-router-dom";
+import Register from "./pages/Register.jsx";
+import Login from "./pages/Login.jsx";
 import "./styles/App.css";
-import MainPage from "./pages/MainPage.jsx";
-import AuthPage from "./pages/AuthPage.jsx";
+import ProfilePage from "./pages/ProfilePage.jsx";
+import ContentPage from "./pages/ContentPage.jsx";
 
 function App() {
   return (
-      <div>
-        {/*<AuthPage/>*/}
-        <MainPage/>
-      </div>
+      <Routes>
+          <Route path="/" element={ <ContentPage/> }/>
+          <Route path="/auth/register" element={ <Register/> }/>
+          <Route path="/auth/login" element={ <Login/> }/>
+          <Route path="/profile" element={ <ProfilePage/> }/>
+      </Routes>
   );
 }
 
