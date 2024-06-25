@@ -56,3 +56,14 @@
     cursor: pointer;
     text-decoration: underline;
 }
+
+.error .auth-form div input {
+    border-color: red;
+}
+
+.error-label {
+    display: flex;
+    color: red;
+    font-style: italic;
+    margin-bottom: 10px;
+}
