@@ -1,114 +1,79 @@
-import { useState } from 'react';
-import Header from '../components/Header.jsx';
-import SearchFilter from "../components/SearchFilter.jsx";
-import BookCard from '../components/BookCard.jsx';
-import BookDetailsModal from '../components/BookDetailsModal.jsx';
-import AddBookForm from '../components/AddBookForm.jsx';
+import React, { useState } from 'react';
+import Header from '../components/Header';
+import BookCard from '../components/BookCard';
+import BookDetailsModal from '../components/BookDetailsModal';
+import AddBookModal from '../components/AddBookModal';
+import FilterSidebar from '../components/FilterSidebar';
 import '../styles/ContentPage.css';
 
+const books = [
+    {
+        id: 1,
+        title: 'Book Title 1',
+        author: 'Author 1',
+        image: 'https://via.placeholder.com/150',
+        description: 'Description 1',
+        offers: [
+            { id: 1, user: 'User A', contact: 'contactA@example.com' },
+            { id: 2, user: 'User B', contact: 'contactB@example.com' },
+        ],
+    },
+    {
+        id: 2,
+        title: 'Book Title 2',
+        author: 'Author 2',
+        image: 'https://via.placeholder.com/150',
+        description: 'Description 2',
+        offers: [
+            { id: 3, user: 'User C', contact: 'contactC@example.com' },
+            { id: 4, user: 'User D', contact: 'contactD@example.com' },
+        ],
+    },
+
+
+];
+
 const ContentPage = () => {
-    const [books, setBooks] = useState([
-        {
-            title: 'Book 1',
-            image: 'https://via.placeholder.com/150',
-            rating: 4,
-            description: 'Description of book 1',
-            genre: 'Fiction',
-            exchangeOffers: [
-                {
-                    user: 'User 1',
-                    contact: 'user1@example.com',
-                    phone: '123-456-7890',
-                },
-                {
-                    user: 'User 2',
-                    contact: 'user2@example.com',
-                    phone: '987-654-3210',
-                },
-            ],
-        },
-        {
-            title: 'Book 2',
-            image: 'https://via.placeholder.com/150',
-            rating: 5,
-            description: 'Description of book 2',
-            genre: 'Non-Fiction',
-            exchangeOffers: [
-                {
-                    user: 'User 3',
-                    contact: 'user3@example.com',
-                    phone: '456-789-1230',
-                },
-            ],
-        },
-    ]);
-
     const [selectedBook, setSelectedBook] = useState(null);
-    const [isModalOpen, setIsModalOpen] = useState(false);
-    const [isAddBookFormOpen, setIsAddBookFormOpen] = useState(false);
-    const [search, setSearch] = useState('');
-    const [genre, setGenre] = useState('');
-    const [isAuthenticated, setIsAuthenticated] = useState(false); // Replace with actual authentication logic
+    const [isAddBookModalOpen, setAddBookModalOpen] = useState(false);
+    const [filters, setFilters] = useState({
+        genre: '',
+        author: '',
+        year: '',
+        language: '',
+        exchangeType: '',
+    });
 
-    const filteredBooks = books.filter((book) =>
-        book.title.toLowerCase().includes(search.toLowerCase()) &&
-        (genre === '' || book.genre === genre)
-    );
+    const handleBookClick = (book) => setSelectedBook(book);
+    const closeBookDetails = () => setSelectedBook(null);
+    const openAddBookModal = () => setAddBookModalOpen(true);
+    const closeAddBookModal = () => setAddBookModalOpen(false);
 
-    const handleBookClick = (book) => {
-        setSelectedBook(book);
-        setIsModalOpen(true);
-    };
+    const applyFilters = (newFilters) => setFilters(newFilters);
 
-    const handleModalClose = () => {
-        setIsModalOpen(false);
-        setSelectedBook(null);
-    };
-
-    const handleAddBookClick = () => {
-        setIsAddBookFormOpen(true);
-    };
-
-    const handleAddBookFormClose = () => {
-        setIsAddBookFormOpen(false);
-    };
-
-    const handleAddBook = (newBook) => {
-        setBooks([...books, newBook]);
-        setIsAddBookFormOpen(false);
-    };
+    const filteredBooks = books.filter((book) => {
+        return (
+            (filters.genre === '' || book.genre === filters.genre) &&
+            (filters.author === '' || book.author === filters.author) &&
+            (filters.year === '' || book.year === filters.year) &&
+            (filters.language === '' || book.language === filters.language) &&
+            (filters.exchangeType === '' || book.exchangeType === filters.exchangeType)
+        );
+    });
 
     return (
-        <div className="app">
-            <div className="main-content">
-                <Header
-                    onAddBookClick={handleAddBookClick}
-                    isAuthenticated={isAuthenticated}
-                />
-                <SearchFilter
-                    search={search}
-                    setSearch={setSearch}
-                    genre={genre}
-                    setGenre={setGenre}
-                />
-                <div className="book-list">
-                    {filteredBooks.map((book, index) => (
-                        <BookCard
-                            key={index}
-                            book={book}
-                            onClick={() => handleBookClick(book)}
-                        />
+        <div className="content-page">
+            <Header onAddBookClick={openAddBookModal} />
+            <div className="content-container">
+                <FilterSidebar onFilterChange={applyFilters} />
+                <div className="books-grid">
+                    {filteredBooks.map((book) => (
+                        <BookCard key={book.id} book={book} onClick={() => handleBookClick(book)} />
                     ))}
                 </div>
-                <BookDetailsModal
-                    book={selectedBook}
-                    isOpen={isModalOpen}
-                    onClose={handleModalClose}
-                />
-                {isAddBookFormOpen && (
-                    <AddBookForm onClose={handleAddBookFormClose} addBook={handleAddBook} />
-                )}
             </div>
+            {selectedBook && <BookDetailsModal book={selectedBook} onClose={closeBookDetails} />}
+            {isAddBookModalOpen && <AddBookModal onClose={closeAddBookModal} />}
         </div>
     );
 };

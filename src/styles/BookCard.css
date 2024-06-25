@@ -1,51 +1,23 @@
 .book-card {
-    background-color: #fff;
-    padding: 15px;
     border: 1px solid #ddd;
-    border-radius: 4px;
-    text-align: left;
-    cursor: pointer;
-    transition: box-shadow 0.3s, transform 0.3s;
-    width: 250px; /* Ширина карточки */
-    box-sizing: border-box;
+    border-radius: 8px;
+    overflow: hidden;
+    width: 200px;
     margin: 10px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 350px; /* Высота карточки */
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.book-card img {
+    width: 100%;
+    height: auto;
+}
+
+.book-card .book-details {
+    padding: 10px;
+    background: #fff;
 }
 
 .book-card:hover {
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    transform: translateY(-5px);
-}
-
-.book-image {
-    width: 100%;
-    height: 150px; /* Уменьшенная высота изображения */
-    border-radius: 4px;
-    margin-bottom: 10px;
-    object-fit: cover;
-}
-
-.book-title {
-    font-size: 16px;
-    margin: 10px 0;
-}
-
-.book-rating {
-    color: #ff5722;
-    margin-bottom: 10px;
-}
-
-@media (max-width: 1024px) {
-    .book-card {
-        width: calc(50% - 20px); /* 2 карточки в ряд с отступами */
-    }
-}
-
-@media (max-width: 768px) {
-    .book-card {
-        width: calc(100% - 20px); /* 1 карточка в ряд с отступами */
-    }
+    transform: scale(1.05);
 }

@@ -1,59 +1,45 @@
 .profile-page {
-    width: 100%;
-    max-width: 1000px;
-    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.profile-container {
+    display: flex;
+    flex: 1;
     padding: 20px;
     box-sizing: border-box;
+}
+
+.profile-info {
+    width: 250px;
     background: #fff;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
     border-radius: 8px;
-}
-
-.profile-header {
-    display: flex;
-    align-items: center;
-    margin-bottom: 20px;
-}
-
-.profile-avatar {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
     margin-right: 20px;
-    position: relative;
 }
 
-.profile-avatar img {
+.avatar {
     width: 150px;
     height: 150px;
     border-radius: 50%;
     object-fit: cover;
+    margin-bottom: 20px;
 }
 
-.profile-avatar .upload-button {
-    display: inline-block;
-    margin-top: 10px;
-    background-color: #ff5722;
-    color: white;
-    padding: 10px 20px;
-    border-radius: 4px;
-    cursor: pointer;
-    text-align: center;
-    font-size: 14px;
-    transition: background-color 0.3s;
+.profile-details h2 {
+    margin: 10px 0;
 }
 
-.profile-avatar .upload-button:hover {
-    background-color: #e64a19;
+.profile-details p {
+    margin: 5px 0;
+    color: #666;
 }
 
-.profile-avatar .upload-button input {
-    display: none;
-}
-
-.profile-details {
-    flex-grow: 1;
-}
-
-.profile-details input,
-.profile-details textarea {
+.edit-profile input,
+.edit-profile textarea {
     width: 100%;
     padding: 10px;
     margin-bottom: 10px;
@@ -61,66 +47,71 @@
     border-radius: 4px;
 }
 
-.profile-details button {
-    padding: 10px 20px;
-    background-color: #ff5722;
-    border: none;
+.edit-profile button {
+    background: #ff5722;
     color: white;
-    cursor: pointer;
+    border: none;
     border-radius: 4px;
-    transition: background-color 0.3s;
+    padding: 10px;
+    cursor: pointer;
 }
 
-.profile-details button:hover {
-    background-color: #e64a19;
+.user-books {
+    flex: 1;
+    background: #f5f5f5;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-.profile-offers {
-    margin-top: 20px;
-}
-
-.profile-offers h3 {
+.user-books h3 {
     margin-bottom: 20px;
 }
 
-.offers-list {
-    display: flex;
-    flex-wrap: wrap;
+.book-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     gap: 20px;
 }
 
-.offer-card {
-    background: white;
+.book-card {
+    background: #fff;
+    border: 1px solid #ddd;
     border-radius: 8px;
     overflow: hidden;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s;
-    cursor: pointer;
-    max-width: 200px;
-    width: 100%;
+    text-align: center;
+    transition: box-shadow 0.3s;
 }
 
-.offer-card:hover {
-    transform: translateY(-5px);
+.book-card:hover {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-.offer-card img {
+.book-card img {
     width: 100%;
     height: auto;
 }
 
-.offer-details {
+.book-info {
     padding: 10px;
 }
 
-.offer-details h4 {
-    margin: 0;
-    font-size: 16px;
-    margin-bottom: 5px;
+.book-info h3 {
+    font-size: 18px;
+    margin: 0 0 5px 0;
 }
 
-.offer-details p {
+.book-info p {
     margin: 0;
-    font-size: 14px;
-    color: #555;
+    color: #666;
+}
+
+.book-info button {
+    background: #ff5722;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 5px 10px;
+    margin: 5px;
+    cursor: pointer;
 }
