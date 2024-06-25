@@ -1,4 +1,4 @@
-.modal-overlay {
+.modal {
     position: fixed;
     top: 0;
     left: 0;
@@ -8,68 +8,46 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 20px;
-    box-sizing: border-box;
 }
 
 .modal-content {
-    background: white;
+    background: #fff;
     padding: 20px;
     border-radius: 8px;
+    width: 90%;
     max-width: 600px;
-    width: 100%;
-    box-sizing: border-box;
-    position: relative;
+    max-height: 90vh;
     overflow-y: auto;
-    max-height: 80%;
+    position: relative;
 }
 
-.modal-close {
+.close-button {
     position: absolute;
     top: 10px;
     right: 10px;
-    background: none;
+    background: #ff5722;
+    color: white;
     border: none;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
     font-size: 18px;
     cursor: pointer;
 }
 
-.modal-header {
-    margin-bottom: 20px;
-}
-
-.modal-header h2 {
-    margin: 0;
-}
-
-.modal-header p {
-    margin: 5px 0 0;
-}
-
-.modal-body {
-    margin-bottom: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.modal-book-image {
+.book-image {
     width: 100%;
-    max-width: 200px;
     height: auto;
     margin-bottom: 20px;
 }
 
-.modal-footer {
+.exchange-offers {
     margin-top: 20px;
 }
 
-.offer-details {
-    border-top: 1px solid #ddd;
-    padding-top: 10px;
-    margin-top: 10px;
-}
-
-.offer-details p {
-    margin: 5px 0;
+.offer {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-bottom: 10px;
 }

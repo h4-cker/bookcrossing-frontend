@@ -1,14 +1,14 @@
 import React from 'react';
 import '../styles/BookCard.css';
 
-const BookCard = ({ book, onClick }) => {
-    return (
-        <div className="book-card" onClick={() => onClick(book)}>
-            <img src={book.image} alt={book.title} className="book-image" />
-            <h2 className="book-title">{book.title}</h2>
-            <p className="book-rating">Rating: {book.rating}/5</p>
+const BookCard = ({ book, onClick }) => (
+    <div className="book-card" onClick={onClick}>
+        <img src={book.image} alt={book.title} />
+        <div className="book-details">
+            <h4>{book.title}</h4>
+            <p>{book.author}</p>
         </div>
-    );
-};
+    </div>
+);
 
 export default BookCard;
