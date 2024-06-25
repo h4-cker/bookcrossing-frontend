@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import "../styles/LoginRegisterPages.css";
+import {instance} from "../utils/axios/index.js";
 
 const Login = () => {
     const navigate = useNavigate();
@@ -12,12 +13,24 @@ const Login = () => {
         navigate('/', { replace: true })
     }
 
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        const userData = {
+            email: event.target.email.value,
+            password: event.target.password.value
+        }
+        const user = await instance.post("/auth/login", userData)
+            .then(function (response) {
+                console.log(response.data.message);
+            });
+    }
+
     return (
         <div className="auth-page">
             <div className="auth-container">
                 <h2>Login</h2>
                 <form className="auth-form"
-                      onSubmit={ navigateMain }>
+                      onSubmit={ handleSubmit }>
                     <input type="email"
                            name="email"
                            placeholder="Email" required />
