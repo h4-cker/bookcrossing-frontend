@@ -1,12 +1,16 @@
 import { useNavigate } from "react-router-dom";
 import "../styles/LoginRegisterPages.css";
 import {instance} from "../utils/axios/index.js";
+import {useState} from "react";
+import ENDPOINTS from "../utils/endpoints/index.js";
 
 const Login = () => {
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
     const navigate = useNavigate();
 
     const navigateRegister = () => {
-        navigate('/auth/register', { replace: true });
+        navigate(ENDPOINTS.AUTH.REGISTER, { replace: true });
     }
 
     const navigateMain = () => {
@@ -16,12 +20,22 @@ const Login = () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         const userData = {
-            email: event.target.email.value,
-            password: event.target.password.value
+            email: email,
+            password: password
         }
-        const user = await instance.post("/auth/login", userData)
-            .then(function (response) {
+        const user = await instance.post(ENDPOINTS.AUTH.LOGIN, userData)
+            .then(response => {
+                const accessToken = response.data.accessToken;
+                const accessTokenExpiration = response.data.accessTokenExpiration;
+                localStorage.setItem("accessToken", accessToken);
+                localStorage.setItem("accessTokenExpiration", accessTokenExpiration);
                 console.log(response.data.message);
+            })
+            .catch((error) => {
+                console.log(error.response.data.message);
+                if (error.response.data.errors) {
+                    console.log(error.response.data.errors[0].msg);
+                }
             });
     }
 
@@ -32,11 +46,12 @@ const Login = () => {
                 <form className="auth-form"
                       onSubmit={ handleSubmit }>
                     <input type="email"
-                           name="email"
-                           placeholder="Email" required />
+                           placeholder="Email"value={ email }
+                           onChange={ event => { setEmail(event.target.value) } } required />
                     <input type="password"
-                           name="password"
-                           placeholder="Password" required />
+                           placeholder="Password"
+                           value={ password }
+                           onChange={ event => { setPassword(event.target.value) } } required />
                     <button type="submit">Login</button>
                 </form>
                 <p className="toggle-form">
