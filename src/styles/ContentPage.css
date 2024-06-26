@@ -70,11 +70,10 @@
 .books-grid {
     width: 100%;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    grid-template-rows: repeat(auto-fill, minmax(30%, 40%));
+    grid-template-columns: repeat(auto-fill, 250px);
     gap: 20px;
     padding: 20px;
-    overflow-y: auto;
+    justify-content: center;
 }
 
 .header .add-book-button.desktop {
@@ -114,8 +113,7 @@
 
 @media (max-width: 768px) {
     .books-grid {
-        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-        grid-template-rows: repeat(auto-fill, minmax(30%, 45%));
+        grid-template-columns: repeat(auto-fill, 200px);
         padding: 10px;
     }
 
