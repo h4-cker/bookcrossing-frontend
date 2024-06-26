@@ -1,37 +1,64 @@
-import React from 'react';
-import '../styles/Header.css';
+import React from "react";
+import "../styles/Header.css";
+import { BASE_URL } from "../config";
+import { useState, useEffect } from "react";
+import { useHttp } from "../hooks/http.hook";
 
 const Header = ({ onAddBookClick }) => {
-    const handleCityChange = (event) => {
-        console.log('Selected city:', event.target.value);
-    };
+  const [locations, setLocations] = useState([]);
+  const { request } = useHttp();
 
-    return (
-        <header className="header">
-            <div className="logo">
-                <a href="/">BookHaven</a>
-            </div>
-            <div className="search-bar">
-                <select>
-                    <option value="title">Title</option>
-                    <option value="author">Author</option>
-                    <option value="isbn">ISBN</option>
-                </select>
-                <input type="text" placeholder="Search" />
-            </div>
-            <div className="location">
-                <select onChange={handleCityChange}>
-                    <option value="Moscow">Moscow</option>
-                    <option value="Saint Petersburg">Saint Petersburg</option>
-                    <option value="Novosibirsk">Novosibirsk</option>
-                </select>
-            </div>
-            <div className="profile">
-                <a href="/profile">Profile</a>
-            </div>
-            <button className="add-book-button" onClick={onAddBookClick}>Add Book</button>
-        </header>
-    );
+  useEffect(() => {
+    getLocations();
+  }, []);
+
+  const getLocations = async () => {
+    try {
+      const data = await request(`${BASE_URL}/categories/locations`);
+      console.log(data);
+
+      setLocations(data);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
+  const handleCityChange = (event) => {
+    console.log("Selected city:", event.target.value);
+  };
+
+  return (
+    <header className="header">
+      <div className="logo">
+        <a href="/">BookHaven</a>
+      </div>
+      <div className="search-bar">
+        <select>
+          <option value="title">Title</option>
+          <option value="author">Author</option>
+          <option value="isbn">ISBN</option>
+        </select>
+        <input type="text" placeholder="Search" />
+      </div>
+      <div className="location">
+        <select onChange={handleCityChange}>
+          {locations.map((location) => {
+            return (
+              <option key={location.id} value={location}>
+                {location}
+              </option>
+            );
+          })}
+        </select>
+      </div>
+      <div className="profile">
+        <a href="/profile">Profile</a>
+      </div>
+      <button className="add-book-button" onClick={onAddBookClick}>
+        Add Book
+      </button>
+    </header>
+  );
 };
 
 export default Header;
