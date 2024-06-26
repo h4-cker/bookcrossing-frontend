@@ -5,6 +5,9 @@ import { useState, useEffect } from "react";
 import { useHttp } from "../hooks/http.hook";
 
 const Header = ({ onAddBookClick }) => {
+  const [location, setLocation] = useState(
+    JSON.parse(localStorage.getItem("currentLocation")) || "Москва"
+  );
   const [locations, setLocations] = useState([]);
   const { request } = useHttp();
 
@@ -23,8 +26,9 @@ const Header = ({ onAddBookClick }) => {
     }
   };
 
-  const handleCityChange = (event) => {
-    console.log("Selected city:", event.target.value);
+  const handleLocationChange = (event) => {
+    setLocation(event.target.value);
+    localStorage.setItem("currentLocation", JSON.stringify(event.target.value));
   };
 
   return (
@@ -41,7 +45,7 @@ const Header = ({ onAddBookClick }) => {
         <input type="text" placeholder="Search" />
       </div>
       <div className="location">
-        <select onChange={handleCityChange}>
+        <select value={location} onChange={handleLocationChange}>
           {locations.map((location) => {
             return (
               <option key={location.id} value={location}>
