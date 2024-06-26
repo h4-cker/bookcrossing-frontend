@@ -12,7 +12,8 @@ const ContentPage = () => {
   const [books, setBooks] = useState([]);
   const [selectedBook, setSelectedBook] = useState(null);
   const [isAddBookModalOpen, setAddBookModalOpen] = useState(false);
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState("name");
+  const [searchValue, setSearchValue] = useState("");
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [selectedCategories, setSelectedCategories] = useState({
     author: "",
@@ -22,6 +23,7 @@ const ContentPage = () => {
     releaseYear: "",
   });
   const [categoriesApplied, setCategoriesApplied] = useState(false);
+  const [searchApplied, setSearchApplied] = useState(false);
   const [location, setLocation] = useState(
     JSON.parse(localStorage.getItem("currentLocation")) || "Москва"
   );
@@ -41,7 +43,7 @@ const ContentPage = () => {
   useEffect(() => {
     async function fetchAds() {
       try {
-        let queryParams = new URLSearchParams({}).toString();
+        let queryParams = new URLSearchParams({});
 
         const filledCategories = {};
 
@@ -52,11 +54,15 @@ const ContentPage = () => {
         }
 
         if (filledCategories) {
-          queryParams = new URLSearchParams(filledCategories).toString();
+          queryParams = new URLSearchParams(filledCategories);
+        }
+
+        if (searchValue) {
+          queryParams.append(searchTerm, searchValue);
         }
 
         let data = await request(
-          `${BASE_URL}/ads/locations/${location}/books?${queryParams}`
+          `${BASE_URL}/ads/locations/${location}/books?${queryParams.toString()}`
         );
 
         setMessage("");
@@ -67,11 +73,21 @@ const ContentPage = () => {
       }
     }
     fetchAds();
-  }, [location, categoriesApplied]);
+  }, [location, categoriesApplied, searchApplied]);
 
   const handleLocationChange = async (event) => {
     setLocation(event.target.value);
     localStorage.setItem("currentLocation", JSON.stringify(event.target.value));
+
+    setSearchTerm("name");
+    setSearchValue("");
+    setSelectedCategories({
+      author: "",
+      genre: "",
+      language: "",
+      passTypes: "",
+      releaseYear: "",
+    });
   };
 
   const handleCategoriesApplying = () => {
@@ -80,14 +96,10 @@ const ContentPage = () => {
 
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
-    if (event.target.value === "") {
-      setFilteredBooks(books);
-    } else {
-      const filtered = books.filter((book) =>
-        book.title.toLowerCase().includes(event.target.value.toLowerCase())
-      );
-      setFilteredBooks(filtered);
-    }
+  };
+
+  const handleSearchApplying = () => {
+    setSearchApplied(!searchApplied);
   };
 
   const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
@@ -111,19 +123,22 @@ const ContentPage = () => {
         <div className="books-section">
           <div className="search-container">
             <div className="search-bar">
-              <select className="search-select">
-                <option value="title">Title</option>
-                <option value="author">Author</option>
-                <option value="isbn">ISBN</option>
+              <select
+                className="search-select"
+                value={searchTerm}
+                onChange={handleSearchChange}
+              >
+                <option value="name">Название</option>
+                <option value="ISBN">ISBN</option>
               </select>
               <input
                 type="text"
                 placeholder="Search"
-                value={searchTerm}
-                onChange={handleSearchChange}
+                value={searchValue}
+                onChange={(event) => setSearchValue(event.target.value)}
                 className="search-input"
               />
-              <button className="search-button">
+              <button className="search-button" onClick={handleSearchApplying}>
                 <i className="fa fa-search"></i>
               </button>
             </div>
