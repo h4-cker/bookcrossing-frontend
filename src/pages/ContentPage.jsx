@@ -40,13 +40,13 @@ const ContentPage = () => {
 
   useEffect(() => {
     async function fetchAds() {
-      let data = await request(`${BASE_URL}/ads/locations/${location}/books`);
-      if (data.message) {
-        setBooks([]);
-        setMessage(data.message);
-      } else {
+      try {
+        let data = await request(`${BASE_URL}/ads/locations/${location}/books`);
         setMessage("");
         setBooks(data);
+      } catch (error) {
+        setMessage(error.message);
+        setBooks([]);
       }
     }
     fetchAds();
