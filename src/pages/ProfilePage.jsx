@@ -16,6 +16,10 @@ const initialUserBooks = [
         author: 'Author 1',
         image: 'https://via.placeholder.com/150',
         description: 'Description 1',
+        genre: 'Fiction',
+        isbn: '1234567890',
+        language: 'English',
+        year: '2020',
     },
     {
         id: 2,
@@ -23,8 +27,11 @@ const initialUserBooks = [
         author: 'Author 2',
         image: 'https://via.placeholder.com/150',
         description: 'Description 2',
+        genre: 'Non-Fiction',
+        isbn: '0987654321',
+        language: 'English',
+        year: '2018',
     },
-    // Add more books as needed
 ];
 
 const ProfilePage = () => {
@@ -38,6 +45,12 @@ const ProfilePage = () => {
     const [bookTitle, setBookTitle] = useState('');
     const [bookAuthor, setBookAuthor] = useState('');
     const [bookDescription, setBookDescription] = useState('');
+    const [bookGenre, setBookGenre] = useState('');
+    const [bookIsbn, setBookIsbn] = useState('');
+    const [bookLanguage, setBookLanguage] = useState('');
+    const [bookYear, setBookYear] = useState('');
+    const [showConfirmDelete, setShowConfirmDelete] = useState(false);
+    const [bookToDelete, setBookToDelete] = useState(null);
 
     const handleAvatarChange = (event) => {
         const file = event.target.files[0];
@@ -55,21 +68,36 @@ const ProfilePage = () => {
         setBookTitle(book.title);
         setBookAuthor(book.author);
         setBookDescription(book.description);
+        setBookGenre(book.genre);
+        setBookIsbn(book.isbn);
+        setBookLanguage(book.language);
+        setBookYear(book.year);
     };
 
     const handleSaveBook = () => {
         setUserBooks((prevBooks) =>
             prevBooks.map((book) =>
                 book.id === editingBook.id
-                    ? { ...book, title: bookTitle, author: bookAuthor, description: bookDescription }
+                    ? {
+                        ...book,
+                        title: bookTitle,
+                        author: bookAuthor,
+                        description: bookDescription,
+                        genre: bookGenre,
+                        isbn: bookIsbn,
+                        language: bookLanguage,
+                        year: bookYear
+                    }
                     : book
             )
         );
         setEditingBook(null);
     };
 
-    const handleDeleteBook = (bookId) => {
-        setUserBooks((prevBooks) => prevBooks.filter((book) => book.id !== bookId));
+    const handleDeleteBook = () => {
+        setUserBooks((prevBooks) => prevBooks.filter((book) => book.id !== bookToDelete));
+        setBookToDelete(null);
+        setShowConfirmDelete(false);
     };
 
     return (
@@ -116,7 +144,7 @@ const ProfilePage = () => {
                                     <h3>{book.title}</h3>
                                     <p>{book.author}</p>
                                     <button onClick={() => handleEditBook(book)}>Edit</button>
-                                    <button onClick={() => handleDeleteBook(book.id)}>Delete</button>
+                                    <button onClick={() => { setBookToDelete(book.id); setShowConfirmDelete(true); }}>Delete</button>
                                 </div>
                             </div>
                         ))}
@@ -147,8 +175,47 @@ const ProfilePage = () => {
                                     onChange={(e) => setBookDescription(e.target.value)}
                                 />
                             </label>
+                            <label>
+                                Genre:
+                                <input
+                                    type="text"
+                                    value={bookGenre}
+                                    onChange={(e) => setBookGenre(e.target.value)}
+                                />
+                            </label>
+                            <label>
+                                ISBN:
+                                <input
+                                    type="text"
+                                    value={bookIsbn}
+                                    onChange={(e) => setBookIsbn(e.target.value)}
+                                />
+                            </label>
+                            <label>
+                                Language:
+                                <input
+                                    type="text"
+                                    value={bookLanguage}
+                                    onChange={(e) => setBookLanguage(e.target.value)}
+                                />
+                            </label>
+                            <label>
+                                Year:
+                                <input
+                                    type="text"
+                                    value={bookYear}
+                                    onChange={(e) => setBookYear(e.target.value)}
+                                />
+                            </label>
                             <button onClick={handleSaveBook}>Save</button>
                             <button onClick={() => setEditingBook(null)}>Cancel</button>
+                        </div>
+                    )}
+                    {showConfirmDelete && (
+                        <div className="confirm-delete-modal">
+                            <p>Are you sure you want to delete this book?</p>
+                            <button onClick={handleDeleteBook}>Yes</button>
+                            <button onClick={() => setShowConfirmDelete(false)}>No</button>
                         </div>
                     )}
                 </div>

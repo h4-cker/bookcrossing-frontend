@@ -1,12 +1,16 @@
 import React, { useState } from 'react';
 import '../styles/AddBookForm.css';
 
-const AddBookModal = ({ onClose }) => {
+const AddBookModal = ({ onClose, onAddBook }) => {
     const [title, setTitle] = useState('');
     const [author, setAuthor] = useState('');
     const [description, setDescription] = useState('');
     const [image, setImage] = useState('');
     const [contact, setContact] = useState('');
+    const [genre, setGenre] = useState('');
+    const [isbn, setIsbn] = useState('');
+    const [language, setLanguage] = useState('');
+    const [year, setYear] = useState('');
 
     const handleImageChange = (event) => {
         const file = event.target.files[0];
@@ -19,7 +23,19 @@ const AddBookModal = ({ onClose }) => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        // Handle book addition logic here
+        const newBook = {
+            title,
+            author,
+            description,
+            image,
+            contact,
+            genre,
+            isbn,
+            language,
+            year,
+            offers: [],
+        };
+        onAddBook(newBook);
         onClose();
     };
 
@@ -43,6 +59,34 @@ const AddBookModal = ({ onClose }) => {
                         placeholder="Author"
                         value={author}
                         onChange={(e) => setAuthor(e.target.value)}
+                        required
+                    />
+                    <input
+                        type="text"
+                        placeholder="Genre"
+                        value={genre}
+                        onChange={(e) => setGenre(e.target.value)}
+                        required
+                    />
+                    <input
+                        type="text"
+                        placeholder="ISBN"
+                        value={isbn}
+                        onChange={(e) => setIsbn(e.target.value)}
+                        required
+                    />
+                    <input
+                        type="text"
+                        placeholder="Language"
+                        value={language}
+                        onChange={(e) => setLanguage(e.target.value)}
+                        required
+                    />
+                    <input
+                        type="number"
+                        placeholder="Year"
+                        value={year}
+                        onChange={(e) => setYear(e.target.value)}
                         required
                     />
                     <textarea

@@ -57,11 +57,12 @@
 }
 
 .user-books {
-    flex: 1;
+    flex: 2;
     background: #f5f5f5;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    flex-wrap: wrap;
 }
 
 .user-books h3 {
@@ -114,4 +115,138 @@
     padding: 5px 10px;
     margin: 5px;
     cursor: pointer;
+}
+
+.edit-book-modal,
+.confirm-delete-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+}
+
+.edit-book-modal h3,
+.confirm-delete-modal p {
+    margin-bottom: 20px;
+}
+
+.edit-book-modal button{
+    margin-right: 10px;
+}
+
+.edit-book-modal label,
+.confirm-delete-modal button {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.edit-book-modal input,
+.edit-book-modal textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.confirm-delete-modal button {
+    background: #ff5722;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 10px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.confirm-delete-modal button:last-child {
+    background: #ccc;
+    color: black;
+}
+
+@media (max-width: 768px) {
+    .profile-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .profile-info {
+        margin-right: 0;
+        margin-bottom: 20px;
+    }
+
+    .user-books {
+        width: 100%;
+    }
+
+    .book-list {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: 40px;
+    }
+
+    .edit-profile input,
+    .edit-profile textarea {
+        padding: 8px;
+        margin-bottom: 8px;
+    }
+
+    .edit-profile button {
+        padding: 8px;
+    }
+
+    .edit-book-modal,
+    .confirm-delete-modal {
+        width: 90%;
+        padding: 15px;
+    }
+
+    .edit-book-modal input,
+    .edit-book-modal textarea {
+        padding: 8px;
+    }
+
+    .confirm-delete-modal button {
+        padding: 8px;
+    }
+}
+
+@media (max-width: 480px) {
+    .book-list {
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+        gap: 40px;
+    }
+
+    .profile-info {
+        width: 100%;
+        padding: 10px;
+    }
+
+    .edit-profile input,
+    .edit-profile textarea {
+        padding: 6px;
+        margin-bottom: 6px;
+    }
+
+    .edit-profile button {
+        padding: 6px;
+    }
+
+    .edit-book-modal,
+    .confirm-delete-modal {
+        width: 95%;
+        padding: 10px;
+    }
+
+    .edit-book-modal input,
+    .edit-book-modal textarea {
+        padding: 6px;
+    }
+
+    .confirm-delete-modal button {
+        padding: 6px;
+    }
 }

@@ -11,15 +11,9 @@ const BookDetailsModal = ({ book, onClose }) => {
                 <h3>{book.author}</h3>
                 <p>{book.description}</p>
                 <div className="exchange-offers">
-                    <h4>Exchange Offers:</h4>
-                    {/* Replace with real data */}
                     <div className="offer">
                         <p><strong>User:</strong> User1</p>
                         <p><strong>Contact:</strong> user1@example.com</p>
-                    </div>
-                    <div className="offer">
-                        <p><strong>User:</strong> User2</p>
-                        <p><strong>Contact:</strong> user2@example.com</p>
                     </div>
                 </div>
             </div>

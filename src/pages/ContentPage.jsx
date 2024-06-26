@@ -6,7 +6,7 @@ import AddBookModal from '../components/AddBookModal';
 import FilterSidebar from '../components/FilterSidebar';
 import '../styles/ContentPage.css';
 
-const books = [
+const initialBooks = [
     {
         id: 1,
         title: 'Book Title 1',
@@ -29,11 +29,10 @@ const books = [
             { id: 4, user: 'User D', contact: 'contactD@example.com' },
         ],
     },
-
-
 ];
 
 const ContentPage = () => {
+    const [books, setBooks] = useState(initialBooks);
     const [selectedBook, setSelectedBook] = useState(null);
     const [isAddBookModalOpen, setAddBookModalOpen] = useState(false);
     const [filters, setFilters] = useState({
@@ -50,6 +49,10 @@ const ContentPage = () => {
     const closeAddBookModal = () => setAddBookModalOpen(false);
 
     const applyFilters = (newFilters) => setFilters(newFilters);
+
+    const addBook = (newBook) => {
+        setBooks([...books, { id: books.length + 1, ...newBook }]);
+    };
 
     const filteredBooks = books.filter((book) => {
         return (
@@ -73,7 +76,7 @@ const ContentPage = () => {
                 </div>
             </div>
             {selectedBook && <BookDetailsModal book={selectedBook} onClose={closeBookDetails} />}
-            {isAddBookModalOpen && <AddBookModal onClose={closeAddBookModal} />}
+            {isAddBookModalOpen && <AddBookModal onClose={closeAddBookModal} onAddBook={addBook} />}
         </div>
     );
 };

@@ -13,7 +13,7 @@
     width: 100%;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    grid-template-rows: repeat(auto-fill, minmax(30%, 1fr));
+    grid-template-rows: repeat(auto-fill, minmax(30%, 40%));
     gap: 20px;
     padding: 20px;
     overflow-y: auto;
@@ -21,7 +21,8 @@
 
 @media (max-width: 768px) {
     .books-grid {
-        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        grid-template-rows: repeat(auto-fill, minmax(30%, 45%));
         padding: 10px;
     }
 }
