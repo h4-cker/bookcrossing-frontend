@@ -4,10 +4,7 @@ import { BASE_URL } from "../config";
 import { useState, useEffect } from "react";
 import { useHttp } from "../hooks/http.hook";
 
-const Header = ({ onAddBookClick }) => {
-  const [location, setLocation] = useState(
-    JSON.parse(localStorage.getItem("currentLocation")) || "Москва"
-  );
+const Header = ({ onAddBookClick, location, handleLocationChange }) => {
   const [locations, setLocations] = useState([]);
   const { request } = useHttp();
 
@@ -24,11 +21,6 @@ const Header = ({ onAddBookClick }) => {
     } catch (error) {
       console.error("Error fetching data:", error);
     }
-  };
-
-  const handleLocationChange = (event) => {
-    setLocation(event.target.value);
-    localStorage.setItem("currentLocation", JSON.stringify(event.target.value));
   };
 
   return (
