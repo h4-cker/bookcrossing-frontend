@@ -3,7 +3,13 @@ import "../styles/FilterSidebar.css";
 import { BASE_URL } from "../config";
 import { useHttp } from "../hooks/http.hook";
 
-const FilterSidebar = ({ onFilterChange, isOpen, toggleSidebar }) => {
+const FilterSidebar = ({
+  isOpen,
+  toggleSidebar,
+  selectedCategories,
+  setSelectedCategories,
+  handleCategoriesApplying,
+}) => {
   const { request } = useHttp();
   const [categories, setCategories] = useState({
     authors: [],
@@ -13,20 +19,6 @@ const FilterSidebar = ({ onFilterChange, isOpen, toggleSidebar }) => {
     releaseYears: [],
   });
 
-  const [selectedGenre, setSelectedGenre] = useState("");
-  const [selectedAuthor, setSelectedAuthor] = useState("");
-  const [selectedYear, setSelectedYear] = useState("");
-  const [selectedLanguage, setSelectedLanguage] = useState("");
-  const [selectedExchangeType, setSelectedExchangeType] = useState("");
-
-  const handleGenreChange = (event) => setSelectedGenre(event.target.value);
-  const handleAuthorChange = (event) => setSelectedAuthor(event.target.value);
-  const handleYearChange = (event) => setSelectedYear(event.target.value);
-  const handleLanguageChange = (event) =>
-    setSelectedLanguage(event.target.value);
-  const handleExchangeTypeChange = (event) =>
-    setSelectedExchangeType(event.target.value);
-
   useEffect(() => {
     async function fetchCategories() {
       const data = await request(`${BASE_URL}/categories/books`);
@@ -35,13 +27,10 @@ const FilterSidebar = ({ onFilterChange, isOpen, toggleSidebar }) => {
     fetchCategories();
   }, []);
 
-  const applyFilters = () => {
-    onFilterChange({
-      genre: selectedGenre,
-      author: selectedAuthor,
-      year: selectedYear,
-      language: selectedLanguage,
-      exchangeType: selectedExchangeType,
+  const handleCategoriesChange = (event) => {
+    setSelectedCategories({
+      ...selectedCategories,
+      [event.target.name]: event.target.value,
     });
   };
 
@@ -52,7 +41,11 @@ const FilterSidebar = ({ onFilterChange, isOpen, toggleSidebar }) => {
       </button>
       <div className="filter-section">
         <h4>Жанр</h4>
-        <select value={selectedGenre} onChange={handleGenreChange}>
+        <select
+          value={selectedCategories.genre}
+          name="genre"
+          onChange={handleCategoriesChange}
+        >
           <option value="">Все</option>
           {categories.genres.map((genre) => (
             <option key={genre} value={genre}>
@@ -63,7 +56,11 @@ const FilterSidebar = ({ onFilterChange, isOpen, toggleSidebar }) => {
       </div>
       <div className="filter-section">
         <h4>Автор</h4>
-        <select value={selectedAuthor} onChange={handleAuthorChange}>
+        <select
+          value={selectedCategories.author}
+          name="author"
+          onChange={handleCategoriesChange}
+        >
           <option value="">Все</option>
           {categories.authors.map((author) => (
             <option key={author} value={author}>
@@ -74,7 +71,11 @@ const FilterSidebar = ({ onFilterChange, isOpen, toggleSidebar }) => {
       </div>
       <div className="filter-section">
         <h4>Год выпуска</h4>
-        <select value={selectedYear} onChange={handleYearChange}>
+        <select
+          value={selectedCategories.releaseYear}
+          onChange={handleCategoriesChange}
+          name="releaseYear"
+        >
           <option value="">Все</option>
           {categories.releaseYears.map((year) => (
             <option key={year} value={year}>
@@ -85,7 +86,11 @@ const FilterSidebar = ({ onFilterChange, isOpen, toggleSidebar }) => {
       </div>
       <div className="filter-section">
         <h4>Язык</h4>
-        <select value={selectedLanguage} onChange={handleLanguageChange}>
+        <select
+          value={selectedCategories.language}
+          onChange={handleCategoriesChange}
+          name="language"
+        >
           <option value="">Все</option>
           {categories.languages.map((language) => (
             <option key={language} value={language}>
@@ -97,8 +102,9 @@ const FilterSidebar = ({ onFilterChange, isOpen, toggleSidebar }) => {
       <div className="filter-section">
         <h4>Тип обмена</h4>
         <select
-          value={selectedExchangeType}
-          onChange={handleExchangeTypeChange}
+          value={selectedCategories.passType}
+          onChange={handleCategoriesChange}
+          name="passType"
         >
           <option value="">Все</option>
           {categories.passTypes.map((type) => (
@@ -108,8 +114,11 @@ const FilterSidebar = ({ onFilterChange, isOpen, toggleSidebar }) => {
           ))}
         </select>
       </div>
-      <button onClick={applyFilters} className="apply-filters-button">
-        Apply Filters
+      <button
+        onClick={handleCategoriesApplying}
+        className="apply-filters-button"
+      >
+        Применить фильтры
       </button>
     </div>
   );
