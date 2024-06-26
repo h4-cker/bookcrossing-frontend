@@ -25,6 +25,9 @@ const BookDetailsModal = ({ book, onClose }) => {
             <p>
               <strong>Contact:</strong> {book.contacts}
             </p>
+            <p>
+              <strong>ExChangeType: </strong> {book.content.exChangeType}
+            </p>
           </div>
         </div>
       </div>

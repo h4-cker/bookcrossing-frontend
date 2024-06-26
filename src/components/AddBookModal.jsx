@@ -11,6 +11,7 @@ const AddBookModal = ({ onClose, onAddBook }) => {
     const [isbn, setIsbn] = useState('');
     const [language, setLanguage] = useState('');
     const [year, setYear] = useState('');
+    const [exChangeType, setexChangeType] = useState('');
 
     const handleImageChange = (event) => {
         const file = event.target.files[0];
@@ -33,6 +34,7 @@ const AddBookModal = ({ onClose, onAddBook }) => {
             isbn,
             language,
             year,
+            exChangeType,
             offers: [],
         };
         onAddBook(newBook);
@@ -87,6 +89,13 @@ const AddBookModal = ({ onClose, onAddBook }) => {
                         placeholder="Year"
                         value={year}
                         onChange={(e) => setYear(e.target.value)}
+                        required
+                    />
+                    <input
+                        type="text"
+                        placeholder="ExChangeType"
+                        value={exChangeType}
+                        onChange={(e) => setexChangeType(e.target.value)}
                         required
                     />
                     <textarea
