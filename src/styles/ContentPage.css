@@ -2,11 +2,69 @@
     display: flex;
     flex-direction: column;
     height: 100vh;
+    margin-top: 60px;
+}
+
+.search-container {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    background: #f5f5f5;
+    margin-bottom: 20px;
+    margin-left: 7px;
+}
+
+.search-bar {
+    display: flex;
+    align-items: center;
+    background: white;
+    border-radius: 50px;
+    overflow: hidden;
+    max-width: 600px;
+    width: 100%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.search-select {
+    padding: 10px;
+    border: none;
+    outline: none;
+    background: #f0f0f0;
+    border-top-left-radius: 50px;
+    border-bottom-left-radius: 50px;
+}
+
+.search-input {
+    padding: 10px;
+    border: none;
+    outline: none;
+    width: 100%;
+}
+
+.search-button {
+    padding: 10px;
+    background: #ff5722;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    color: white;
+    border-top-right-radius: 50px;
+    border-bottom-right-radius: 50px;
+}
+
+.search-button .fa-search {
+    font-size: 16px;
 }
 
 .content-container {
     display: flex;
     flex: 1;
+}
+
+.books-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
 }
 
 .books-grid {
@@ -19,10 +77,86 @@
     overflow-y: auto;
 }
 
+.header .add-book-button.desktop {
+    display: inline-block;
+}
+
+.header .filter-button {
+    display: none;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.floating-add-button {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    background-color: #ff5722;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    font-size: 24px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    z-index: 1000;
+}
+
+.floating-add-button .fa-plus {
+    font-size: 24px;
+}
+
 @media (max-width: 768px) {
     .books-grid {
         grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
         grid-template-rows: repeat(auto-fill, minmax(30%, 45%));
         padding: 10px;
+    }
+
+    .header .add-book-button.desktop {
+        display: none;
+    }
+
+    .header .filter-button {
+        display: block;
+    }
+
+    .floating-add-button {
+        display: block;
+    }
+
+    .search-container {
+        margin-top: 10px;
+        padding: 10px;
+    }
+
+    .search-bar select, .search-bar input {
+        padding: 5px;
+    }
+
+    .search-button {
+        padding: 8px;
+    }
+
+    .search-button .fa-search {
+        font-size: 14px;
+    }
+
+    .filter-sidebar.open {
+        transform: translateX(0);
+    }
+
+    .filter-sidebar .toggle-button {
+        display: block;
+    }
+
+    .apply-filters-button {
+        margin-top: 20px;
     }
 }

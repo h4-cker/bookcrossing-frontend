@@ -7,7 +7,7 @@ const years = ['2022', '2021', '2020'];
 const languages = ['English', 'Russian', 'Spanish'];
 const exchangeTypes = ['Direct Exchange', 'Exchange for Points'];
 
-const FilterSidebar = ({ onFilterChange }) => {
+const FilterSidebar = ({ onFilterChange, isOpen, toggleSidebar }) => {
     const [selectedGenre, setSelectedGenre] = useState('');
     const [selectedAuthor, setSelectedAuthor] = useState('');
     const [selectedYear, setSelectedYear] = useState('');
@@ -31,7 +31,10 @@ const FilterSidebar = ({ onFilterChange }) => {
     };
 
     return (
-        <div className="filter-sidebar">
+        <div className={`filter-sidebar ${isOpen ? 'open' : ''}`}>
+            <button className="toggle-button" onClick={toggleSidebar}>
+                {isOpen ? 'Close Filters' : 'Open Filters'}
+            </button>
             <div className="filter-section">
                 <h4>Genres</h4>
                 <select value={selectedGenre} onChange={handleGenreChange}>

@@ -2,6 +2,7 @@
     display: flex;
     flex-direction: column;
     height: 100vh;
+    margin-top: 60px;
 }
 
 .profile-container {
@@ -9,6 +10,7 @@
     flex: 1;
     padding: 20px;
     box-sizing: border-box;
+    flex-wrap: wrap;
 }
 
 .profile-info {
@@ -19,6 +21,7 @@
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
     margin-right: 20px;
+    margin-bottom: 20px;
 }
 
 .avatar {
@@ -91,6 +94,7 @@
 .book-card img {
     width: 100%;
     height: auto;
+    max-height: 150px;
 }
 
 .book-info {
@@ -135,7 +139,7 @@
     margin-bottom: 20px;
 }
 
-.edit-book-modal button{
+.edit-book-modal button {
     margin-right: 10px;
 }
 
@@ -185,7 +189,7 @@
 
     .book-list {
         grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-        gap: 40px;
+        gap: 20px;
     }
 
     .edit-profile input,
@@ -217,7 +221,7 @@
 @media (max-width: 480px) {
     .book-list {
         grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-        gap: 40px;
+        gap: 20px;
     }
 
     .profile-info {
