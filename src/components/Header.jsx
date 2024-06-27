@@ -3,6 +3,7 @@ import "../styles/Header.css";
 import { BASE_URL } from "../config";
 import { useHttp } from "../hooks/http.hook";
 import { AuthContext } from "../context/AuthContext";
+import toast from "react-hot-toast";
 
 const Header = ({
   onAddBookClick,
@@ -30,6 +31,10 @@ const Header = ({
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
+  };
+
+  const handleClick = () => {
+    toast.error("Войдите в систему чтобы добавлять книги");
   };
 
   return (
