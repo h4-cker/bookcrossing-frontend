@@ -4,6 +4,7 @@ import "../styles/ProfilePage.css";
 import { useHttp } from "../hooks/http.hook.js";
 import { BASE_URL } from "../config.jsx";
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const ProfilePage = () => {
   const [userName, setUserName] = useState("");
@@ -105,8 +106,11 @@ const ProfilePage = () => {
     }
   };
 
-  const toggleEditingProfile = async () => {
+  const toggleEditingProfile = () => {
     setEditingProfile(!editingProfile);
+  };
+
+  const applyEditingProfile = async () => {
     const responseName = await request(
       `${BASE_URL}/profile/name`,
       "PATCH",
@@ -129,6 +133,8 @@ const ProfilePage = () => {
         Authorization: `Bearer ${userData.accessToken}`,
       }
     );
+    toggleEditingProfile();
+    toast.success("Изменения приняты", { position: "bottom-right" });
   };
 
   const handleEditBook = (book) => {
@@ -204,7 +210,7 @@ const ProfilePage = () => {
                 value={userEmail}
                 onChange={(e) => setUserEmail(e.target.value)}
               />
-              <button onClick={toggleEditingProfile}>Сохранить</button>
+              <button onClick={applyEditingProfile}>Сохранить</button>
             </div>
           ) : (
             <div className="profile-details">
