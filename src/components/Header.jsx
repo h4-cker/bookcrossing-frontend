@@ -3,13 +3,14 @@ import "../styles/Header.css";
 import { BASE_URL } from "../config";
 import { useHttp } from "../hooks/http.hook";
 import { AuthContext } from "../context/AuthContext";
+import toast from "react-hot-toast";
 
 const Header = ({
-                  onAddBookClick,
-                  location,
-                  handleLocationChange,
-                  toggleSidebar,
-                }) => {
+  onAddBookClick,
+  location,
+  handleLocationChange,
+  toggleSidebar,
+}) => {
   const [locations, setLocations] = useState([]);
   const { request } = useHttp();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -32,41 +33,52 @@ const Header = ({
     setIsMenuOpen(!isMenuOpen);
   };
 
+  const handleClick = () => {
+    toast.error("Войдите в систему чтобы добавлять книги");
+  };
+
   return (
-      <header className="header">
-        <div className="header-content">
-          <button className="menu-button" onClick={toggleMenu}>
-            <i className="fa fa-bars"></i>
-          </button>
-          <div className="logo">
-            <a href="/">BookHaven</a>
+    <header className="header">
+      <div className="header-content">
+        <button className="menu-button" onClick={toggleMenu}>
+          <i className="fa fa-bars"></i>
+        </button>
+        <div className="logo">
+          <a href="/">BookHaven</a>
+        </div>
+        <div className={`menu-content ${isMenuOpen ? "open" : ""}`}>
+          <div className="location">
+            <select value={location} onChange={handleLocationChange}>
+              {locations.map((location) => (
+                <option key={location.id} value={location}>
+                  {location}
+                </option>
+              ))}
+            </select>
           </div>
-          <div className={`menu-content ${isMenuOpen ? "open" : ""}`}>
-            <div className="location">
-              <select value={location} onChange={handleLocationChange}>
-                {locations.map((location) => (
-                    <option key={location.id} value={location}>
-                      {location}
-                    </option>
-                ))}
-              </select>
-            </div>
-            <div className="profile">
-              {auth.isAuthenticated ? (
-                  <a href="/profile">Профиль</a>
-              ) : (
-                  <a href="/auth/register">Войти</a>
-              )}
-            </div>
+          <div className="profile">
+            {auth.isAuthenticated ? (
+              <a href="/profile">Профиль</a>
+            ) : (
+              <a href="/auth/register">Войти</a>
+            )}
           </div>
+        </div>
+        {auth.isAuthenticated ? (
           <button className="add-book-button desktop" onClick={onAddBookClick}>
             Добавить книгу
           </button>
-          <button className="filter-button" onClick={toggleSidebar}>
-            Фильтры
+        ) : (
+          <button className="add-book-button desktop" onClick={handleClick}>
+            Добавить книгу
           </button>
-        </div>
-      </header>
+        )}
+
+        <button className="filter-button" onClick={toggleSidebar}>
+          Фильтры
+        </button>
+      </div>
+    </header>
   );
 };
 
