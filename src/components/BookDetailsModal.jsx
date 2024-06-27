@@ -14,8 +14,8 @@ const BookDetailsModal = ({ book, onClose }) => {
           alt={book.content.name}
           className="book-image"
         />
-        <h2>{book.content.name}</h2>
-        <h3>{book.content.author}</h3>
+        <h2 align="center">{book.content.name}</h2>
+        <h3 align="center">{book.content.author}</h3><br/>
         <p>
           <strong>Описание:</strong> {book.description}
         </p>
