@@ -26,55 +26,55 @@ const Login = () => {
       password: password,
     };
     const user = await instance
-      .post(ENDPOINTS.AUTH.LOGIN, userData)
-      .then((response) => {
-        const accessToken = response.data.accessToken;
-        const accessTokenExpiration = response.data.accessTokenExpiration;
-        const userId = response.data.userId;
+        .post(ENDPOINTS.AUTH.LOGIN, userData)
+        .then((response) => {
+          const accessToken = response.data.accessToken;
+          const accessTokenExpiration = response.data.accessTokenExpiration;
+          const userId = response.data.userId;
 
-        console.log(response.data.message);
+          console.log(response.data.message);
 
-        auth.login(accessToken, Date.now() + accessTokenExpiration, userId);
-      })
-      .catch((error) => {
-        console.log(error.response.data.message);
-        if (error.response.data.errors) {
-          console.log(error.response.data.errors[0].msg);
-        }
-      });
+          auth.login(accessToken, Date.now() + accessTokenExpiration, userId);
+        })
+        .catch((error) => {
+          console.log(error.response.data.message);
+          if (error.response.data.errors) {
+            console.log(error.response.data.errors[0].msg);
+          }
+        });
   };
 
   return (
-    <div className="auth-page">
-      <div className="auth-container">
-        <h2>Login</h2>
-        <form className="auth-form" onSubmit={handleSubmit}>
-          <input
-            type="email"
-            placeholder="Email"
-            value={email}
-            onChange={(event) => {
-              setEmail(event.target.value);
-            }}
-            required
-          />
-          <input
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={(event) => {
-              setPassword(event.target.value);
-            }}
-            required
-          />
-          <button type="submit">Login</button>
-        </form>
-        <p className="toggle-form">
-          Don`t have an account?&nbsp;
-          <span onClick={navigateRegister}>Register</span>
-        </p>
+      <div className="auth-page">
+        <div className="auth-container">
+          <h2>Вход</h2>
+          <form className="auth-form" onSubmit={handleSubmit}>
+            <input
+                type="email"
+                placeholder="Email"
+                value={email}
+                onChange={(event) => {
+                  setEmail(event.target.value);
+                }}
+                required
+            />
+            <input
+                type="password"
+                placeholder="Пароль"
+                value={password}
+                onChange={(event) => {
+                  setPassword(event.target.value);
+                }}
+                required
+            />
+            <button type="submit">Войти</button>
+          </form>
+          <p className="toggle-form">
+            Ещё нет аккаунта?&nbsp;
+            <span onClick={navigateRegister}>Зарегистрироваться</span>
+          </p>
+        </div>
       </div>
-    </div>
   );
 };
 

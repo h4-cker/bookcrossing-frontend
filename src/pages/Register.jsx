@@ -80,82 +80,82 @@ const Register = () => {
     // let errorType = null;
 
     const response = await instance
-      .post(ENDPOINTS.AUTH.REGISTER, userData)
-      .then((response) => {
-        const accessToken = response.data.accessToken;
-        const accessTokenExpiration = response.data.accessTokenExpiration;
-        const userId = response.data.userId;
+        .post(ENDPOINTS.AUTH.REGISTER, userData)
+        .then((response) => {
+          const accessToken = response.data.accessToken;
+          const accessTokenExpiration = response.data.accessTokenExpiration;
+          const userId = response.data.userId;
 
-        console.log(response.data.message);
+          console.log(response.data.message);
 
-        auth.login(accessToken, Date.now() + accessTokenExpiration, userId);
-      })
-      .catch((error) => {
-        console.log(error.response.data.message);
-        if (error.response.data.errors) {
-          console.log(error.response.data.errors[0].msg);
-        }
-        // switch (error.response.data.errors[0].msg) {
-        //     case validationErrors.NAME:
-        //         errorType = validationErrors.NAME;
-        //         break;
-        //     case validationErrors.EMAIL:
-        //         errorType = validationErrors.EMAIL;
-        //         break;
-        //     case validationErrors.PASSWORD:
-        //         errorType = validationErrors.PASSWORD;
-        //         break;
-        // }
-      });
+          auth.login(accessToken, Date.now() + accessTokenExpiration, userId);
+        })
+        .catch((error) => {
+          console.log(error.response.data.message);
+          if (error.response.data.errors) {
+            console.log(error.response.data.errors[0].msg);
+          }
+          // switch (error.response.data.errors[0].msg) {
+          //     case validationErrors.NAME:
+          //         errorType = validationErrors.NAME;
+          //         break;
+          //     case validationErrors.EMAIL:
+          //         errorType = validationErrors.EMAIL;
+          //         break;
+          //     case validationErrors.PASSWORD:
+          //         errorType = validationErrors.PASSWORD;
+          //         break;
+          // }
+        });
     // validationCheck(errorType);
   };
 
   return (
-    <div className="auth-page">
-      <div className="auth-container">
-        <h2>Register</h2>
-        <form className="auth-form" id="regForm" onSubmit={handleSubmit}>
-          <div>
-            <input
-              type="text"
-              placeholder="Full Name"
-              value={name}
-              onChange={(event) => {
-                setName(event.target.value);
-              }}
-              required
-            />
-          </div>
-          <div>
-            <input
-              type="email"
-              placeholder="Email"
-              value={email}
-              onChange={(event) => {
-                setEmail(event.target.value);
-              }}
-              required
-            />
-          </div>
-          <div>
-            <input
-              type="password"
-              placeholder="Password"
-              value={password}
-              onChange={(event) => {
-                setPassword(event.target.value);
-              }}
-              required
-            />
-          </div>
-          <button type="submit">Register</button>
-        </form>
-        <p className="toggle-form">
-          Already have an account?&nbsp;
-          <span onClick={navigateLogin}>Login</span>
-        </p>
+      <div className="auth-page">
+        <div className="auth-container">
+          <h2>Регистрация</h2>
+          <form className="auth-form" id="regForm" onSubmit={handleSubmit}>
+            <div>
+              <input
+                  type="text"
+                  placeholder="Ваше имя"
+                  value={name}
+                  onChange={(event) => {
+                    setName(event.target.value);
+                  }}
+                  required
+              />
+            </div>
+            <div>
+              <input
+                  type="email"
+                  placeholder="Email"
+                  value={email}
+                  onChange={(event) => {
+                    setEmail(event.target.value);
+                  }}
+                  required
+              />
+            </div>
+            <div>
+              <input
+                  type="password"
+                  placeholder="Пароль"
+                  value={password}
+                  onChange={(event) => {
+                    setPassword(event.target.value);
+                  }}
+                  required
+              />
+            </div>
+            <button type="submit">Зарегистрироваться</button>
+          </form>
+          <p className="toggle-form">
+            Уже есть аккаунт?&nbsp;
+            <span onClick={navigateLogin}>Войти</span>
+          </p>
+        </div>
       </div>
-    </div>
   );
 };
 
