@@ -3,6 +3,7 @@ import React from "react";
 import { useRoutes } from "./routes";
 import { useAuth } from "./hooks/auth.hook";
 import { AuthContext } from "./context/AuthContext";
+import { Toaster } from "react-hot-toast";
 
 function App() {
   const { accessToken, accessTokenExpirationDate, login, logout, userId } =
@@ -21,6 +22,7 @@ function App() {
         isAuthenticated,
       }}
     >
+      <Toaster />
       {isAuthenticated}
       {routes}
     </AuthContext.Provider>
