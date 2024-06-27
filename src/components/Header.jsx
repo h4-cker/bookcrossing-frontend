@@ -34,7 +34,7 @@ const Header = ({
   };
 
   const handleClick = () => {
-    toast.error("Войдите в систему чтобы добавлять книги");
+    toast.error("Войдите в систему, чтобы добавлять книги");
   };
 
   return (
