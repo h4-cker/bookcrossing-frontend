@@ -32,7 +32,10 @@ const ContentPage = () => {
   const handleBookClick = (book) => setSelectedBook(book);
   const closeBookDetails = () => setSelectedBook(null);
   const openAddBookModal = () => setAddBookModalOpen(true);
-  const closeAddBookModal = () => setAddBookModalOpen(false);
+  const closeAddBookModal = () => {
+    setAddBookModalOpen(false);
+    window.location.reload();
+  };
 
   const { request } = useHttp();
 
