@@ -20,13 +20,13 @@ const BookDetailsModal = ({ book, onClose }) => {
         <div className="exchange-offers">
           <div className="offer">
             <p>
-              <strong>User:</strong> {book.user.name}
+              <strong>Владелец:</strong> {book.user.name}
             </p>
             <p>
-              <strong>Contact:</strong> {book.contacts}
+              <strong>Контакт:</strong> {book.contacts}
             </p>
             <p>
-              <strong>ExChangeType: </strong> {book.content.exChangeType}
+              <strong>Тип обмена: </strong> {book.content.exChangeType}
             </p>
           </div>
         </div>

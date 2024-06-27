@@ -45,14 +45,14 @@ const Header = ({ onAddBookClick, location, handleLocationChange, toggleSidebar 
                         </select>
                     </div>
                     <div className="profile">
-                        <a href="/profile">Profile</a>
+                        <a href="/profile">Профиль</a>
                     </div>
                 </div>
                 <button className="add-book-button desktop" onClick={onAddBookClick}>
-                    Add Book
+                    Добавить книгу
                 </button>
                 <button className="filter-button" onClick={toggleSidebar}>
-                    Filters
+                    Фильтры
                 </button>
             </div>
         </header>

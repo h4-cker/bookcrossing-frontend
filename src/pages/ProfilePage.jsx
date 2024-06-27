@@ -123,19 +123,19 @@ const ProfilePage = () => {
                                 value={description}
                                 onChange={(e) => setDescription(e.target.value)}
                             />
-                            <button onClick={toggleEditingProfile}>Save</button>
+                            <button onClick={toggleEditingProfile}>Сохранить</button>
                         </div>
                     ) : (
                         <div className="profile-details">
                             <h2>{name}</h2>
                             <p>{phone}</p>
                             <p>{description}</p>
-                            <button onClick={toggleEditingProfile}>Edit Profile</button>
+                            <button onClick={toggleEditingProfile}>Изменить</button>
                         </div>
                     )}
                 </div>
                 <div className="user-books">
-                    <h3>My Books for Exchange</h3>
+                    <h3>Мои книги</h3>
                     <div className="book-list">
                         {userBooks.map((book) => (
                             <div key={book.id} className="book-card">
@@ -143,17 +143,17 @@ const ProfilePage = () => {
                                 <div className="book-info">
                                     <h3>{book.title}</h3>
                                     <p>{book.author}</p>
-                                    <button onClick={() => handleEditBook(book)}>Edit</button>
-                                    <button onClick={() => { setBookToDelete(book.id); setShowConfirmDelete(true); }}>Delete</button>
+                                    <button onClick={() => handleEditBook(book)}>Изменить</button>
+                                    <button onClick={() => { setBookToDelete(book.id); setShowConfirmDelete(true); }}>Удалить</button>
                                 </div>
                             </div>
                         ))}
                     </div>
                     {editingBook && (
                         <div className="edit-book-modal">
-                            <h3>Edit Book</h3>
+                            <h3>Изменить</h3>
                             <label>
-                                Title:
+                                Название
                                 <input
                                     type="text"
                                     value={bookTitle}
@@ -161,7 +161,7 @@ const ProfilePage = () => {
                                 />
                             </label>
                             <label>
-                                Author:
+                                Автор
                                 <input
                                     type="text"
                                     value={bookAuthor}
@@ -169,14 +169,14 @@ const ProfilePage = () => {
                                 />
                             </label>
                             <label>
-                                Description:
+                                Описание
                                 <textarea
                                     value={bookDescription}
                                     onChange={(e) => setBookDescription(e.target.value)}
                                 />
                             </label>
                             <label>
-                                Genre:
+                                Жанр
                                 <input
                                     type="text"
                                     value={bookGenre}
@@ -184,7 +184,7 @@ const ProfilePage = () => {
                                 />
                             </label>
                             <label>
-                                ISBN:
+                                ISBN
                                 <input
                                     type="text"
                                     value={bookIsbn}
@@ -192,7 +192,7 @@ const ProfilePage = () => {
                                 />
                             </label>
                             <label>
-                                Language:
+                                Язык
                                 <input
                                     type="text"
                                     value={bookLanguage}
@@ -200,22 +200,22 @@ const ProfilePage = () => {
                                 />
                             </label>
                             <label>
-                                Year:
+                                Год выпуска
                                 <input
                                     type="text"
                                     value={bookYear}
                                     onChange={(e) => setBookYear(e.target.value)}
                                 />
                             </label>
-                            <button onClick={handleSaveBook}>Save</button>
-                            <button onClick={() => setEditingBook(null)}>Cancel</button>
+                            <button onClick={handleSaveBook}>Сохранить</button>
+                            <button onClick={() => setEditingBook(null)}>Отменить</button>
                         </div>
                     )}
                     {showConfirmDelete && (
                         <div className="confirm-delete-modal">
-                            <p>Are you sure you want to delete this book?</p>
-                            <button onClick={handleDeleteBook}>Yes</button>
-                            <button onClick={() => setShowConfirmDelete(false)}>No</button>
+                            <p>Вы уверены, что хотите удалить книгу?</p>
+                            <button onClick={handleDeleteBook}>Да</button>
+                            <button onClick={() => setShowConfirmDelete(false)}>Нет</button>
                         </div>
                     )}
                 </div>

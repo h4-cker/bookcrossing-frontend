@@ -47,25 +47,25 @@ const AddBookModal = ({ onClose, onAddBook }) => {
                 <button className="close-button" onClick={onClose}>
                     &times;
                 </button>
-                <h2>Add New Book</h2>
+                <h2>Добавить новую книгу</h2>
                 <form onSubmit={handleSubmit}>
                     <input
                         type="text"
-                        placeholder="Title"
+                        placeholder="Название"
                         value={title}
                         onChange={(e) => setTitle(e.target.value)}
                         required
                     />
                     <input
                         type="text"
-                        placeholder="Author"
+                        placeholder="Автор"
                         value={author}
                         onChange={(e) => setAuthor(e.target.value)}
                         required
                     />
                     <input
                         type="text"
-                        placeholder="Genre"
+                        placeholder="Жанр"
                         value={genre}
                         onChange={(e) => setGenre(e.target.value)}
                         required
@@ -79,27 +79,27 @@ const AddBookModal = ({ onClose, onAddBook }) => {
                     />
                     <input
                         type="text"
-                        placeholder="Language"
+                        placeholder="Язык"
                         value={language}
                         onChange={(e) => setLanguage(e.target.value)}
                         required
                     />
                     <input
                         type="number"
-                        placeholder="Year"
+                        placeholder="Год издания"
                         value={year}
                         onChange={(e) => setYear(e.target.value)}
                         required
                     />
                     <input
                         type="text"
-                        placeholder="ExChangeType"
+                        placeholder="Тип обмена"
                         value={exChangeType}
                         onChange={(e) => setexChangeType(e.target.value)}
                         required
                     />
                     <textarea
-                        placeholder="Description"
+                        placeholder="Описание"
                         value={description}
                         onChange={(e) => setDescription(e.target.value)}
                         required
@@ -108,12 +108,12 @@ const AddBookModal = ({ onClose, onAddBook }) => {
                     {image && <img src={image} alt="Book" className="preview-image" />}
                     <input
                         type="text"
-                        placeholder="Contact"
+                        placeholder="Контакт"
                         value={contact}
                         onChange={(e) => setContact(e.target.value)}
                         required
                     />
-                    <button type="submit">Add Book</button>
+                    <button type="submit">Разместить</button>
                 </form>
             </div>
         </div>
