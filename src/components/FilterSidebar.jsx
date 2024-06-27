@@ -104,7 +104,7 @@ const FilterSidebar = ({
         <select
           value={selectedCategories.passType}
           onChange={handleCategoriesChange}
-          name="passType"
+          name="type"
         >
           <option value="">Все</option>
           {categories.passTypes.map((type) => (
