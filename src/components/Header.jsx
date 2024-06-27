@@ -60,7 +60,7 @@ const Header = ({
             {auth.isAuthenticated ? (
               <a href="/profile">Профиль</a>
             ) : (
-              <a href="/auth/login">Профиль</a>
+              <a href="/auth/login">Войти</a>
             )}
           </div>
         </div>
