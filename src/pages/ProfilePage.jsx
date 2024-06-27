@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Header from "../components/Header";
 import "../styles/ProfilePage.css";
 import { useHttp } from "../hooks/http.hook.js";
 import { BASE_URL } from "../config.jsx";
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
+import { AuthContext } from "../context/AuthContext.js";
 
 const ProfilePage = () => {
   const [userName, setUserName] = useState("");
@@ -27,6 +29,8 @@ const ProfilePage = () => {
   const [bookReleaseYear, setBookReleaseYear] = useState("");
   const [showConfirmDelete, setShowConfirmDelete] = useState(false);
   const [adToDelete, setAdToDelete] = useState(null);
+
+  const auth = useContext(AuthContext);
 
   const { request } = useHttp();
 
@@ -106,8 +110,11 @@ const ProfilePage = () => {
     }
   };
 
-  const toggleEditingProfile = async () => {
+  const toggleEditingProfile = () => {
     setEditingProfile(!editingProfile);
+  };
+
+  const applyEditingProfile = async () => {
     const responseName = await request(
       `${BASE_URL}/profile/name`,
       "PATCH",
@@ -130,6 +137,8 @@ const ProfilePage = () => {
         Authorization: `Bearer ${userData.accessToken}`,
       }
     );
+    toggleEditingProfile();
+    toast.success("Изменения приняты", { position: "bottom-right" });
   };
 
   const handleEditAd = (ad, adId) => {
@@ -179,9 +188,11 @@ const ProfilePage = () => {
   };
 
   const handleLogout = () => {
-    localStorage.removeItem("userData");
+    auth.logout();
     navigate("/");
-    window.location.reload();
+    toast.success("Вы вышли из аккаунта", {
+      icon: "🤨",
+    });
   };
 
   const handleLocationChange = async (event) => {
@@ -212,7 +223,7 @@ const ProfilePage = () => {
                 value={userEmail}
                 onChange={(e) => setUserEmail(e.target.value)}
               />
-              <button onClick={toggleEditingProfile}>Сохранить</button>
+              <button onClick={applyEditingProfile}>Сохранить</button>
             </div>
           ) : (
             <div className="profile-details">

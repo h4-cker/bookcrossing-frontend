@@ -2,8 +2,9 @@ import React, { useContext, useState } from "react";
 import "../styles/AddBookForm.css";
 import { BASE_URL } from "../config";
 import { AuthContext } from "../context/AuthContext";
+import toast from "react-hot-toast";
 
-const AddBookModal = ({ onClose, onAddBook }) => {
+const AddBookModal = ({ onClose, onAddBook, adAdded, setAdAdded }) => {
   const [image, setImage] = useState("");
   const [form, setForm] = useState({
     bookName: "",
@@ -38,9 +39,10 @@ const AddBookModal = ({ onClose, onAddBook }) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
+    console.log(form);
     const sendObj = form;
 
-    if (formData) {
+    if (formData && !form.imageUrl) {
       const response = await fetch(`${BASE_URL}/upload`, {
         method: "POST",
         headers: {
@@ -77,21 +79,32 @@ const AddBookModal = ({ onClose, onAddBook }) => {
     const data = await response.json();
     console.log(data);
 
-    onClose();
-    setForm({
-      bookName: "",
-      bookAuthor: "",
-      description: "",
-      imageUrl: "",
-      contacts: "",
-      bookGenre: "",
-      bookISBN: "",
-      bookLanguage: "",
-      bookReleaseYear: null,
-      type: "",
-      location: "",
-    });
-    setFormData(null);
+    if (response.ok) {
+      toast.success("Объявление успешно создано!");
+
+      onClose();
+
+      setForm({
+        bookName: "",
+        bookAuthor: "",
+        description: "",
+        imageUrl: "",
+        contacts: "",
+        bookGenre: "",
+        bookISBN: "",
+        bookLanguage: "",
+        bookReleaseYear: null,
+        type: "",
+        location: "",
+      });
+      setFormData(null);
+
+      setAdAdded(!adAdded);
+    } else {
+      for (let i = 0; i < data.errors.length; i++) {
+        toast.error(data.errors[i].msg, { position: "bottom-right" });
+      }
+    }
   };
 
   const handleChange = (event) => {

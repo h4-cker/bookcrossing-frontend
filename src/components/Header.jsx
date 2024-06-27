@@ -59,9 +59,16 @@ const Header = ({
             )}
           </div>
         </div>
-        <button className="add-book-button desktop" onClick={onAddBookClick}>
-          Добавить книгу
-        </button>
+        {auth.isAuthenticated ? (
+          <button className="add-book-button desktop" onClick={onAddBookClick}>
+            Добавить книгу
+          </button>
+        ) : (
+          <button className="add-book-button desktop" onClick={handleClick}>
+            Добавить книгу
+          </button>
+        )}
+
         <button className="filter-button" onClick={toggleSidebar}>
           Фильтры
         </button>

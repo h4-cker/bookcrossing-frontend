@@ -29,13 +29,13 @@ const ContentPage = () => {
     JSON.parse(localStorage.getItem("currentLocation")) || "Москва"
   );
   const [message, setMessage] = useState("");
+  const [adAdded, setAdAdded] = useState(false);
 
   const handleBookClick = (book) => setSelectedBook(book);
   const closeBookDetails = () => setSelectedBook(null);
   const openAddBookModal = () => setAddBookModalOpen(true);
   const closeAddBookModal = () => {
     setAddBookModalOpen(false);
-    window.location.reload();
   };
 
   const { request } = useHttp();
@@ -81,7 +81,7 @@ const ContentPage = () => {
       }
     }
     fetchAds();
-  }, [location, categoriesApplied, searchApplied]);
+  }, [location, categoriesApplied, searchApplied, adAdded]);
 
   const handleLocationChange = async (event) => {
     setLocation(event.target.value);
@@ -168,7 +168,12 @@ const ContentPage = () => {
         <BookDetailsModal book={selectedBook} onClose={closeBookDetails} />
       )}
       {isAddBookModalOpen && (
-        <AddBookModal onClose={closeAddBookModal} onAddBook={addBook} />
+        <AddBookModal
+          onClose={closeAddBookModal}
+          onAddBook={addBook}
+          adAdded={adAdded}
+          setAdAdded={setAdAdded}
+        />
       )}
       <button className="floating-add-button" onClick={openAddBookModal}>
         <i className="fa fa-plus"></i>
