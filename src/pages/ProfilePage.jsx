@@ -1,46 +1,17 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import Header from '../components/Header';
 import '../styles/ProfilePage.css';
-
-const initialUserData = {
-    name: 'John Doe',
-    phone: '123-456-7890',
-    description: 'Book lover and exchange enthusiast',
-    avatar: 'https://via.placeholder.com/150',
-};
-
-const initialUserBooks = [
-    {
-        id: 1,
-        title: 'Book Title 1',
-        author: 'Author 1',
-        image: 'https://via.placeholder.com/150',
-        description: 'Description 1',
-        genre: 'Fiction',
-        isbn: '1234567890',
-        language: 'English',
-        year: '2020',
-    },
-    {
-        id: 2,
-        title: 'Book Title 2',
-        author: 'Author 2',
-        image: 'https://via.placeholder.com/150',
-        description: 'Description 2',
-        genre: 'Non-Fiction',
-        isbn: '0987654321',
-        language: 'English',
-        year: '2018',
-    },
-];
+import {useHttp} from "../hooks/http.hook.js";
+import {BASE_URL} from "../config.jsx";
 
 const ProfilePage = () => {
+    const [userName, setUserName] = useState('')
+    const [userEmail, setUserEmail] = useState('')
+    const [userAvatar, setUserAvatar] = useState('')
+    const [userBooks, setUserBooks] = useState([]);
+    const userData = JSON.parse(localStorage.getItem("userData"));
+
     const [editingProfile, setEditingProfile] = useState(false);
-    const [avatar, setAvatar] = useState(initialUserData.avatar);
-    const [name, setName] = useState(initialUserData.name);
-    const [phone, setPhone] = useState(initialUserData.phone);
-    const [description, setDescription] = useState(initialUserData.description);
-    const [userBooks, setUserBooks] = useState(initialUserBooks);
     const [editingBook, setEditingBook] = useState(null);
     const [bookTitle, setBookTitle] = useState('');
     const [bookAuthor, setBookAuthor] = useState('');
@@ -52,12 +23,49 @@ const ProfilePage = () => {
     const [showConfirmDelete, setShowConfirmDelete] = useState(false);
     const [bookToDelete, setBookToDelete] = useState(null);
 
-    const handleAvatarChange = (event) => {
+    const { request } = useHttp();
+
+    useEffect(() => {
+        async function fetchUserData() {
+            try {
+                console.log(userData.accessToken)
+                const data = await request(`${BASE_URL}/profile/${userData.userId}`, "GET", null, {
+                    Authorization: `Bearer ${userData.accessToken}`
+                });
+                setUserName(data.userInfo.name);
+                setUserEmail(data.userInfo.email);
+                setUserAvatar(data.userInfo.avatarUrl);
+            } catch (e) {
+                setUserName('');
+                setUserEmail('');
+                setUserAvatar('');
+            }
+        }
+
+        async function fetchUserBooks() {
+            try {
+                const data = await request(`${BASE_URL}/ads/users/${userData.userId}/books`, "GET", null, {
+                    Authorization: `Bearer ${userData.accessToken}`
+                });
+                setUserBooks(data);
+            } catch (e) {
+                setUserBooks([])
+            }
+        }
+
+        fetchUserData();
+        fetchUserBooks();
+    }, [])
+
+    const handleAvatarChange = async (event) => {
         const file = event.target.files[0];
         if (file) {
             const reader = new FileReader();
-            reader.onload = (e) => setAvatar(e.target.result);
+            reader.onload = (e) => setUserAvatar(e.target.result);
             reader.readAsDataURL(file);
+            // const response = await request(`${BASE_URL}/profile/setAvatar`, "PATCH", file, {
+            //     Authorization: `Bearer ${userData.accessToken}`
+            // })
         }
     };
 
@@ -105,31 +113,26 @@ const ProfilePage = () => {
             <Header />
             <div className="profile-container">
                 <div className="profile-info">
-                    <img src={avatar} alt="Avatar" className="avatar" />
+                    <img src={userAvatar} alt="Avatar" className="avatar" />
                     {editingProfile ? (
                         <div className="edit-profile">
                             <input type="file" onChange={handleAvatarChange} />
                             <input
                                 type="text"
-                                value={name}
-                                onChange={(e) => setName(e.target.value)}
+                                value={userName}
+                                onChange={(e) => setUserName(e.target.value)}
                             />
                             <input
                                 type="text"
-                                value={phone}
-                                onChange={(e) => setPhone(e.target.value)}
-                            />
-                            <textarea
-                                value={description}
-                                onChange={(e) => setDescription(e.target.value)}
+                                value={userEmail}
+                                onChange={(e) => setUserEmail(e.target.value)}
                             />
                             <button onClick={toggleEditingProfile}>Сохранить</button>
                         </div>
                     ) : (
                         <div className="profile-details">
-                            <h2>{name}</h2>
-                            <p>{phone}</p>
-                            <p>{description}</p>
+                            <h2>{userName}</h2>
+                            <p>{userEmail}</p>
                             <button onClick={toggleEditingProfile}>Изменить</button>
                         </div>
                     )}
