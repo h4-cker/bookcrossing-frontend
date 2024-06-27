@@ -42,7 +42,13 @@ const Login = () => {
         toast.success(response.data.message);
       })
       .catch((error) => {
-        toast.error(error.response.data.message);
+        if (error.response.data.errors) {
+          for (error of error.response.data.errors) {
+            toast.error(error.msg);
+          }
+        } else {
+          toast.error(error.response.data.message);
+        }
       });
   };
 
