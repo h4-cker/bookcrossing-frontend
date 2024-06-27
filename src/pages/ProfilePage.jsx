@@ -30,6 +30,8 @@ const ProfilePage = () => {
   const [showConfirmDelete, setShowConfirmDelete] = useState(false);
   const [adToDelete, setAdToDelete] = useState(null);
 
+  const [adListChanged, setAdListChanged] = useState(false);
+
   const auth = useContext(AuthContext);
 
   const { request } = useHttp();
@@ -75,7 +77,7 @@ const ProfilePage = () => {
 
     fetchUserData();
     fetchUserBooks();
-  }, [request, userData.accessToken, userData.userId]);
+  }, [request, userData.accessToken, userData.userId, adListChanged]);
 
   const handleAvatarChange = async (event) => {
     const file = event.target.files[0];
@@ -154,37 +156,39 @@ const ProfilePage = () => {
 
   const handleSaveBook = async () => {
     const data = await request(
-        `${BASE_URL}/ads/books/${editingAdId}`,
-        "PATCH",
-        {
-          description: bookDescription,
-          bookName: bookName,
-          bookAuthor: bookAuthor,
-          bookGenre: bookGenre,
-          bookISBN: bookISBN,
-          bookLanguage: bookLanguage,
-          bookReleaseYear: bookReleaseYear,
-        },
-        {
-          Authorization: `Bearer ${userData.accessToken}`,
-        }
+      `${BASE_URL}/ads/books/${editingAdId}`,
+      "PATCH",
+      {
+        description: bookDescription,
+        bookName: bookName,
+        bookAuthor: bookAuthor,
+        bookGenre: bookGenre,
+        bookISBN: bookISBN,
+        bookLanguage: bookLanguage,
+        bookReleaseYear: bookReleaseYear,
+      },
+      {
+        Authorization: `Bearer ${userData.accessToken}`,
+      }
     );
     setEditingAdId(null);
-    window.location.reload();
+    setAdListChanged(!adListChanged);
+    toast.success("Изменения сохранены");
   };
 
   const handleDeleteBook = async () => {
     const data = await request(
-        `${BASE_URL}/ads/books/${adToDelete}`,
-        "DELETE",
-        null,
-        {
-          Authorization: `Bearer ${userData.accessToken}`,
-        }
+      `${BASE_URL}/ads/books/${adToDelete}`,
+      "DELETE",
+      null,
+      {
+        Authorization: `Bearer ${userData.accessToken}`,
+      }
     );
     setAdToDelete(null);
     setShowConfirmDelete(false);
-    window.location.reload();
+    setAdListChanged(!adListChanged);
+    toast.success("Изменения сохранены");
   };
 
   const handleLogout = () => {
@@ -322,7 +326,7 @@ const ProfilePage = () => {
                   onChange={(e) => setBookReleaseYear(e.target.value)}
                 />
               </label>
-              <button onClick={ handleSaveBook }>Сохранить</button>
+              <button onClick={handleSaveBook}>Сохранить</button>
               <button onClick={() => setEditingAdId(null)}>Отменить</button>
             </div>
           )}
