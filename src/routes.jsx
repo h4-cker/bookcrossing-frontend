@@ -9,6 +9,7 @@ export const useRoutes = (isAuthenticated) => {
   if (isAuthenticated) {
     return (
       <Routes>
+        <Route path="/profile" element={<ProfilePage />} />
         <Route path="/" element={<ContentPage />} />
         <Route path="/auth/register" element={<Navigate replace to="/" />} />
         <Route path="/auth/login" element={<Navigate replace to="/" />} />
@@ -21,10 +22,6 @@ export const useRoutes = (isAuthenticated) => {
       <Route path="/" element={<ContentPage />} />
       <Route path="/auth/register" element={<Register />} />
       <Route path="/auth/login" element={<Login />} />
-      <Route
-        path="/profile"
-        element={<Navigate replace to="/auth/register" />}
-      />
     </Routes>
   );
 };
