@@ -9,7 +9,7 @@ const ProfilePage = () => {
   const [userName, setUserName] = useState("");
   const [userEmail, setUserEmail] = useState("");
   const [userAvatar, setUserAvatar] = useState("");
-  const [userBooks, setUserBooks] = useState([]);
+  const [userAds, setUserAds] = useState([]);
   const userData = JSON.parse(localStorage.getItem("userData"));
   const navigate = useNavigate();
   const [location, setLocation] = useState(
@@ -17,16 +17,16 @@ const ProfilePage = () => {
   );
 
   const [editingProfile, setEditingProfile] = useState(false);
-  const [editingBook, setEditingBook] = useState(null);
-  const [bookTitle, setBookTitle] = useState("");
+  const [editingAdId, setEditingAdId] = useState(null);
+  const [bookName, setBookName] = useState("");
   const [bookAuthor, setBookAuthor] = useState("");
   const [bookDescription, setBookDescription] = useState("");
   const [bookGenre, setBookGenre] = useState("");
-  const [bookIsbn, setBookIsbn] = useState("");
+  const [bookISBN, setBookISBN] = useState("");
   const [bookLanguage, setBookLanguage] = useState("");
-  const [bookYear, setBookYear] = useState("");
+  const [bookReleaseYear, setBookReleaseYear] = useState("");
   const [showConfirmDelete, setShowConfirmDelete] = useState(false);
-  const [bookToDelete, setBookToDelete] = useState(null);
+  const [adToDelete, setAdToDelete] = useState(null);
 
   const { request } = useHttp();
 
@@ -62,9 +62,10 @@ const ProfilePage = () => {
             Authorization: `Bearer ${userData.accessToken}`,
           }
         );
-        setUserBooks(data);
+        console.log(data[0]._id);
+        setUserAds(data);
       } catch (e) {
-        setUserBooks([]);
+        setUserAds([]);
       }
     }
 
@@ -131,43 +132,50 @@ const ProfilePage = () => {
     );
   };
 
-  const handleEditBook = (book) => {
-    setEditingBook(book);
-    setBookTitle(book.title);
-    setBookAuthor(book.author);
-    setBookDescription(book.description);
-    setBookGenre(book.genre);
-    setBookIsbn(book.isbn);
-    setBookLanguage(book.language);
-    setBookYear(book.year);
+  const handleEditAd = (ad, adId) => {
+    setEditingAdId(adId);
+    setBookName(ad.content.name);
+    setBookAuthor(ad.content.author);
+    setBookDescription(ad.description);
+    setBookGenre(ad.content.genre);
+    setBookISBN(ad.content.ISBN);
+    setBookLanguage(ad.content.language);
+    setBookReleaseYear(ad.content.releaseYear);
   };
 
-  const handleSaveBook = () => {
-    setUserBooks((prevBooks) =>
-      prevBooks.map((book) =>
-        book.id === editingBook.id
-          ? {
-              ...book,
-              title: bookTitle,
-              author: bookAuthor,
-              description: bookDescription,
-              genre: bookGenre,
-              isbn: bookIsbn,
-              language: bookLanguage,
-              year: bookYear,
-            }
-          : book
-      )
+  const handleSaveBook = async () => {
+    const data = await request(
+        `${BASE_URL}/ads/books/${editingAdId}`,
+        "PATCH",
+        {
+          description: bookDescription,
+          bookName: bookName,
+          bookAuthor: bookAuthor,
+          bookGenre: bookGenre,
+          bookISBN: bookISBN,
+          bookLanguage: bookLanguage,
+          bookReleaseYear: bookReleaseYear,
+        },
+        {
+          Authorization: `Bearer ${userData.accessToken}`,
+        }
     );
-    setEditingBook(null);
+    setEditingAdId(null);
+    window.location.reload();
   };
 
-  const handleDeleteBook = () => {
-    setUserBooks((prevBooks) =>
-      prevBooks.filter((book) => book.id !== bookToDelete)
+  const handleDeleteBook = async () => {
+    const data = await request(
+        `${BASE_URL}/ads/books/${adToDelete}`,
+        "DELETE",
+        null,
+        {
+          Authorization: `Bearer ${userData.accessToken}`,
+        }
     );
-    setBookToDelete(null);
+    setAdToDelete(null);
     setShowConfirmDelete(false);
+    window.location.reload();
   };
 
   const handleLogout = () => {
@@ -219,20 +227,20 @@ const ProfilePage = () => {
         </div>
         <div className="user-books">
           <h3>Мои книги</h3>
-          {userBooks.length > 0 ? (
+          {userAds.length > 0 ? (
             <div className="book-list">
-              {userBooks.map((book) => (
-                <div key={book.id} className="book-card">
-                  <img src={book.image} alt={book.title} />
+              {userAds.map((ad) => (
+                <div key={ad._id} className="book-card">
+                  <img src={ad.imageUrl} alt={ad.content.name} />
                   <div className="book-info">
-                    <h3>{book.title}</h3>
-                    <p>{book.author}</p>
-                    <button onClick={() => handleEditBook(book)}>
+                    <h3>{ad.content.name}</h3>
+                    <p>{ad.content.author}</p>
+                    <button onClick={() => handleEditAd(ad, ad._id)}>
                       Изменить
                     </button>
                     <button
                       onClick={() => {
-                        setBookToDelete(book.id);
+                        setAdToDelete(ad._id);
                         setShowConfirmDelete(true);
                       }}
                     >
@@ -245,15 +253,15 @@ const ProfilePage = () => {
           ) : (
             <p className="no-books">У вас пока нет объявлений.</p>
           )}
-          {editingBook && (
+          {editingAdId && (
             <div className="edit-book-modal">
               <h3>Изменить</h3>
               <label>
                 Название
                 <input
                   type="text"
-                  value={bookTitle}
-                  onChange={(e) => setBookTitle(e.target.value)}
+                  value={bookName}
+                  onChange={(e) => setBookName(e.target.value)}
                 />
               </label>
               <label>
@@ -283,8 +291,8 @@ const ProfilePage = () => {
                 ISBN
                 <input
                   type="text"
-                  value={bookIsbn}
-                  onChange={(e) => setBookIsbn(e.target.value)}
+                  value={bookISBN}
+                  onChange={(e) => setBookISBN(e.target.value)}
                 />
               </label>
               <label>
@@ -299,12 +307,12 @@ const ProfilePage = () => {
                 Год выпуска
                 <input
                   type="text"
-                  value={bookYear}
-                  onChange={(e) => setBookYear(e.target.value)}
+                  value={bookReleaseYear}
+                  onChange={(e) => setBookReleaseYear(e.target.value)}
                 />
               </label>
-              <button onClick={handleSaveBook}>Сохранить</button>
-              <button onClick={() => setEditingBook(null)}>Отменить</button>
+              <button onClick={ handleSaveBook }>Сохранить</button>
+              <button onClick={() => setEditingAdId(null)}>Отменить</button>
             </div>
           )}
           {showConfirmDelete && (
