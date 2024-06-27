@@ -1,13 +1,13 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import Header from '../components/Header';
 import '../styles/ProfilePage.css';
-import {useHttp} from "../hooks/http.hook.js";
-import {BASE_URL} from "../config.jsx";
+import { useHttp } from "../hooks/http.hook.js";
+import { BASE_URL } from "../config.jsx";
 
 const ProfilePage = () => {
-    const [userName, setUserName] = useState('')
-    const [userEmail, setUserEmail] = useState('')
-    const [userAvatar, setUserAvatar] = useState('')
+    const [userName, setUserName] = useState('');
+    const [userEmail, setUserEmail] = useState('');
+    const [userAvatar, setUserAvatar] = useState('');
     const [userBooks, setUserBooks] = useState([]);
     const userData = JSON.parse(localStorage.getItem("userData"));
 
@@ -28,7 +28,6 @@ const ProfilePage = () => {
     useEffect(() => {
         async function fetchUserData() {
             try {
-                console.log(userData.accessToken)
                 const data = await request(`${BASE_URL}/profile/${userData.userId}`, "GET", null, {
                     Authorization: `Bearer ${userData.accessToken}`
                 });
@@ -49,13 +48,13 @@ const ProfilePage = () => {
                 });
                 setUserBooks(data);
             } catch (e) {
-                setUserBooks([])
+                setUserBooks([]);
             }
         }
 
         fetchUserData();
         fetchUserBooks();
-    }, [])
+    }, [request, userData.accessToken, userData.userId]);
 
     const handleAvatarChange = async (event) => {
         const file = event.target.files[0];
@@ -63,9 +62,6 @@ const ProfilePage = () => {
             const reader = new FileReader();
             reader.onload = (e) => setUserAvatar(e.target.result);
             reader.readAsDataURL(file);
-            // const response = await request(`${BASE_URL}/profile/setAvatar`, "PATCH", file, {
-            //     Authorization: `Bearer ${userData.accessToken}`
-            // })
         }
     };
 
@@ -139,19 +135,23 @@ const ProfilePage = () => {
                 </div>
                 <div className="user-books">
                     <h3>Мои книги</h3>
-                    <div className="book-list">
-                        {userBooks.map((book) => (
-                            <div key={book.id} className="book-card">
-                                <img src={book.image} alt={book.title} />
-                                <div className="book-info">
-                                    <h3>{book.title}</h3>
-                                    <p>{book.author}</p>
-                                    <button onClick={() => handleEditBook(book)}>Изменить</button>
-                                    <button onClick={() => { setBookToDelete(book.id); setShowConfirmDelete(true); }}>Удалить</button>
+                    {userBooks.length > 0 ? (
+                        <div className="book-list">
+                            {userBooks.map((book) => (
+                                <div key={book.id} className="book-card">
+                                    <img src={book.image} alt={book.title} />
+                                    <div className="book-info">
+                                        <h3>{book.title}</h3>
+                                        <p>{book.author}</p>
+                                        <button onClick={() => handleEditBook(book)}>Изменить</button>
+                                        <button onClick={() => { setBookToDelete(book.id); setShowConfirmDelete(true); }}>Удалить</button>
+                                    </div>
                                 </div>
-                            </div>
-                        ))}
-                    </div>
+                            ))}
+                        </div>
+                    ) : (
+                        <p className="no-books">У вас пока нет объявлений.</p>
+                    )}
                     {editingBook && (
                         <div className="edit-book-modal">
                             <h3>Изменить</h3>
