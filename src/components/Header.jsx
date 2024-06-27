@@ -5,11 +5,11 @@ import { useHttp } from "../hooks/http.hook";
 import { AuthContext } from "../context/AuthContext";
 
 const Header = ({
-  onAddBookClick,
-  location,
-  handleLocationChange,
-  toggleSidebar,
-}) => {
+                  onAddBookClick,
+                  location,
+                  handleLocationChange,
+                  toggleSidebar,
+                }) => {
   const [locations, setLocations] = useState([]);
   const { request } = useHttp();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -33,40 +33,40 @@ const Header = ({
   };
 
   return (
-    <header className="header">
-      <div className="header-content">
-        <button className="menu-button" onClick={toggleMenu}>
-          <i className="fa fa-bars"></i>
-        </button>
-        <div className="logo">
-          <a href="/">BookHaven</a>
-        </div>
-        <div className={`menu-content ${isMenuOpen ? "open" : ""}`}>
-          <div className="location">
-            <select value={location} onChange={handleLocationChange}>
-              {locations.map((location) => (
-                <option key={location.id} value={location}>
-                  {location}
-                </option>
-              ))}
-            </select>
+      <header className="header">
+        <div className="header-content">
+          <button className="menu-button" onClick={toggleMenu}>
+            <i className="fa fa-bars"></i>
+          </button>
+          <div className="logo">
+            <a href="/">BookHaven</a>
           </div>
-          <div className="profile">
-            {auth.isAuthenticated ? (
-              <a href="/profile">Профиль</a>
-            ) : (
-              <a href="/auth/register">Профиль</a>
-            )}
+          <div className={`menu-content ${isMenuOpen ? "open" : ""}`}>
+            <div className="location">
+              <select value={location} onChange={handleLocationChange}>
+                {locations.map((location) => (
+                    <option key={location.id} value={location}>
+                      {location}
+                    </option>
+                ))}
+              </select>
+            </div>
+            <div className="profile">
+              {auth.isAuthenticated ? (
+                  <a href="/profile">Профиль</a>
+              ) : (
+                  <a href="/auth/register">Войти</a>
+              )}
+            </div>
           </div>
+          <button className="add-book-button desktop" onClick={onAddBookClick}>
+            Добавить книгу
+          </button>
+          <button className="filter-button" onClick={toggleSidebar}>
+            Фильтры
+          </button>
         </div>
-        <button className="add-book-button desktop" onClick={onAddBookClick}>
-          Добавить книгу
-        </button>
-        <button className="filter-button" onClick={toggleSidebar}>
-          Фильтры
-        </button>
-      </div>
-    </header>
+      </header>
   );
 };
 
