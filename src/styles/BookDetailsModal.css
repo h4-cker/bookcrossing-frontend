@@ -22,17 +22,18 @@
     position: relative;
 }
 
+.modal-content button{
+    background: #ff5722;
+}
+
 .close-button {
-
-    position: absolute;
-
-    top: 10px;
-    right: 10px;
-    color: gray;
+    background: #e64a19;
+    color: white;
     border: none;
-    /*border-radius: 50%;*/
-    font-size: 18px;
+    border-radius: 4px;
+    padding: 10px 20px;
     cursor: pointer;
+    margin-top: 10px;
 }
 
 .book-image {
