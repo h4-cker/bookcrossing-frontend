@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom'; // импортируем хук useNavigate
 import Header from '../components/Header';
 import '../styles/ProfilePage.css';
 import { useHttp } from "../hooks/http.hook.js";
@@ -10,6 +11,7 @@ const ProfilePage = () => {
     const [userAvatar, setUserAvatar] = useState('');
     const [userBooks, setUserBooks] = useState([]);
     const userData = JSON.parse(localStorage.getItem("userData"));
+    const navigate = useNavigate();
 
     const [editingProfile, setEditingProfile] = useState(false);
     const [editingBook, setEditingBook] = useState(null);
@@ -104,6 +106,11 @@ const ProfilePage = () => {
         setShowConfirmDelete(false);
     };
 
+    const handleLogout = () => {
+        localStorage.removeItem("userData");
+        navigate('/login');
+    };
+
     return (
         <div className="profile-page">
             <Header />
@@ -132,6 +139,7 @@ const ProfilePage = () => {
                             <button onClick={toggleEditingProfile}>Изменить</button>
                         </div>
                     )}
+                    <button onClick={handleLogout} className="logout-button">Выйти</button>
                 </div>
                 <div className="user-books">
                     <h3>Мои книги</h3>
