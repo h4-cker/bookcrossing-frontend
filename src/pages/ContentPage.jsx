@@ -7,6 +7,7 @@ import FilterSidebar from "../components/FilterSidebar";
 import "../styles/ContentPage.css";
 import { useHttp } from "../hooks/http.hook";
 import { BASE_URL } from "../config";
+import toast from "react-hot-toast";
 
 const ContentPage = () => {
   const [books, setBooks] = useState([]);
@@ -71,6 +72,10 @@ const ContentPage = () => {
         setMessage("");
         setBooks(data);
       } catch (error) {
+        toast("Таких книг у нас пока нет", {
+          icon: "😔",
+          position: "bottom-right",
+        });
         setMessage(error.message);
         setBooks([]);
       }
