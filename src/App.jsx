@@ -1,28 +1,30 @@
-import { Route, Routes } from "react-router-dom";
-import Register from "./pages/Register.jsx";
-import Login from "./pages/Login.jsx";
 import "./styles/App.css";
-import ProfilePage from "./pages/ProfilePage.jsx";
-import ContentPage from "./pages/ContentPage.jsx";
+import React from "react";
+import { useRoutes } from "./routes";
+import { useAuth } from "./hooks/auth.hook";
+import { AuthContext } from "./context/AuthContext";
 
 function App() {
-    const isAuthenticated = true;
-    if (isAuthenticated) {
-        return (
-            <Routes>
-                <Route path="/" element={ <ContentPage/> }/>
-                <Route path="/auth/register" element={ <Register/> }/>
-                <Route path="/auth/login" element={ <Login/> }/>
-                <Route path="/profile" element={ <ProfilePage/> }/>
-            </Routes>
-        );
-    }
-    return (
-        <Routes>
-            <Route path="/auth/register" element={ <Register/> }/>
-            <Route path="/auth/login" element={ <Login/> }/>
-        </Routes>
-    );
+  const { accessToken, accessTokenExpirationDate, login, logout, userId } =
+    useAuth();
+  const isAuthenticated = !!accessToken;
+  const routes = useRoutes(isAuthenticated);
+
+  return (
+    <AuthContext.Provider
+      value={{
+        accessToken,
+        accessTokenExpirationDate,
+        login,
+        logout,
+        userId,
+        isAuthenticated,
+      }}
+    >
+      {isAuthenticated}
+      {routes}
+    </AuthContext.Provider>
+  );
 }
 
 export default App;
