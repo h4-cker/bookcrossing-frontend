@@ -10,7 +10,8 @@ const BookCard = ({ book, onClick }) => (
     />
     <div className="book-details">
       <h4>{book.content.name}</h4>
-      <p>{book.content.author}</p>
+      <p>{book.content.author}</p><br/>
+        <p className={"exchangetype"}>{book.type}</p>
     </div>
   </div>
 );

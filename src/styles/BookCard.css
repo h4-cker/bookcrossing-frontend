@@ -17,6 +17,14 @@
     object-fit: cover;
 }
 
+.exchangetype{
+    border-radius: 20px;
+    margin-left: 25%;
+    margin-right: 25%;
+    color: white;
+    background: #ff5722;
+}
+
 .book-card .book-details {
     padding: 10px;
     background: #fff;
