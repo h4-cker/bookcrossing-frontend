@@ -16,7 +16,24 @@ const BookDetailsModal = ({ book, onClose }) => {
         />
         <h2>{book.content.name}</h2>
         <h3>{book.content.author}</h3>
-        <p>{book.description}</p>
+        <p>
+          <strong>Описание:</strong> {book.description}
+        </p>
+        <p>
+          <strong>Жанр:</strong> {book.content.genre}
+        </p>
+        <p>
+          <strong>ISBN:</strong> {book.content.ISBN}
+        </p>
+        <p>
+          <strong>Язык:</strong> {book.content.language}
+        </p>
+        <p>
+          <strong>Год выпуска:</strong> {book.content.releaseYear}
+        </p>
+        <p>
+          <strong>Город:</strong> {book.location}
+        </p>
         <div className="exchange-offers">
           <div className="offer">
             <p>
@@ -26,7 +43,7 @@ const BookDetailsModal = ({ book, onClose }) => {
               <strong>Контакт:</strong> {book.contacts}
             </p>
             <p>
-              <strong>Тип обмена: </strong> {book.content.exChangeType}
+              <strong>Тип обмена: </strong> {book.type}
             </p>
           </div>
         </div>
