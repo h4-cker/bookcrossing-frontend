@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // импортируем хук useNavigate
+import React, {useEffect, useState} from 'react';
 import Header from '../components/Header';
 import '../styles/ProfilePage.css';
 import { useHttp } from "../hooks/http.hook.js";
 import { BASE_URL } from "../config.jsx";
+import {useNavigate} from "react-router-dom";
 
 const ProfilePage = () => {
     const [userName, setUserName] = useState('');
@@ -12,6 +12,9 @@ const ProfilePage = () => {
     const [userBooks, setUserBooks] = useState([]);
     const userData = JSON.parse(localStorage.getItem("userData"));
     const navigate = useNavigate();
+    const [location, setLocation] = useState(
+        JSON.parse(localStorage.getItem("currentLocation")) || "Москва"
+    );
 
     const [editingProfile, setEditingProfile] = useState(false);
     const [editingBook, setEditingBook] = useState(null);
@@ -36,6 +39,7 @@ const ProfilePage = () => {
                 setUserName(data.userInfo.name);
                 setUserEmail(data.userInfo.email);
                 setUserAvatar(data.userInfo.avatarUrl);
+                console.log(data)
             } catch (e) {
                 setUserName('');
                 setUserEmail('');
@@ -64,10 +68,49 @@ const ProfilePage = () => {
             const reader = new FileReader();
             reader.onload = (e) => setUserAvatar(e.target.result);
             reader.readAsDataURL(file);
+
+            const formData = new FormData();
+            formData.append("image", file);
+            const responseImage = await fetch(`${BASE_URL}/upload`, {
+                method: "POST",
+                headers: {
+                    Authorization: `Bearer ${userData.accessToken}`
+                },
+                body: formData
+            })
+            const data = await responseImage.json();
+            const fileURL = data.url;
+            const response = await fetch(`${BASE_URL}/profile/setAvatar`, {
+                method: "POST",
+                headers:  {
+                    Authorization: `Bearer ${userData.accessToken}`
+                },
+                body: fileURL
+            })
         }
     };
 
-    const toggleEditingProfile = () => setEditingProfile(!editingProfile);
+    const toggleEditingProfile = async () => {
+        setEditingProfile(!editingProfile);
+        const responseName = await request(`${BASE_URL}/profile/name`, "PATCH",
+            {
+                userId: userData.userId,
+                name: userName
+            },
+            {
+                Authorization: `Bearer ${userData.accessToken}`
+            }
+        )
+        const responseEmail = await request(`${BASE_URL}/profile/email`, "PATCH",
+            {
+                userId: userData.userId,
+                email: userEmail
+            },
+            {
+                Authorization: `Bearer ${userData.accessToken}`
+            }
+        )
+    };
 
     const handleEditBook = (book) => {
         setEditingBook(book);
@@ -108,12 +151,22 @@ const ProfilePage = () => {
 
     const handleLogout = () => {
         localStorage.removeItem("userData");
-        navigate('/auth/login');
+        navigate("/");
+        window.location.reload();
     };
+
+    const handleLocationChange = async (event) => {
+        setLocation(event.target.value);
+        localStorage.setItem("currentLocation", JSON.stringify(event.target.value));
+    }
 
     return (
         <div className="profile-page">
-            <Header />
+            <Header
+                // onAddBookClick={openAddBookModal}
+                location={location}
+                handleLocationChange={handleLocationChange}
+            />
             <div className="profile-container">
                 <div className="profile-info">
                     <img src={userAvatar} alt="Avatar" className="avatar" />
