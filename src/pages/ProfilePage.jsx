@@ -108,7 +108,7 @@ const ProfilePage = () => {
 
     const handleLogout = () => {
         localStorage.removeItem("userData");
-        navigate('/login');
+        navigate('/auth/login');
     };
 
     return (
